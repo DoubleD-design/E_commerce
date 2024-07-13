@@ -4,9 +4,13 @@ import HomeSectionCarousel from "../../component/HomeSectionCarousel/HomeSection
 
 const HomePage = () => {
   return (
-    <div className="absolute">
+    <div>
       <MainCarousel />
-      <div className="absolute">
+      <div className="space-y-10 py-20 flex-col justify-center">
+        <HomeSectionCarousel />
+        <HomeSectionCarousel />
+        <HomeSectionCarousel />
+        <HomeSectionCarousel />
         <HomeSectionCarousel />
       </div>
     </div>

@@ -6,7 +6,7 @@ import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import "react-alice-carousel/lib/alice-carousel.css";
 
-const HomeSectionCarousel = ({ data }) => {
+const HomeSectionCarousel = ({ data, sectionName }) => {
   const [activeIndex, setActiveIndex] = useState(0);
   const [itemCount, setItemCount] = useState(0);
   const carouselRef = useRef(null);
@@ -41,7 +41,10 @@ const HomeSectionCarousel = ({ data }) => {
 
   return (
     <div className="border-t border-b border-indigo-300 relative">
-      <div className="relative flex w-full p-5">
+      <h2 className="text-2xl font-extrabold text-gray-800 py-5">
+        {sectionName}
+      </h2>
+      <div className="relative flex items-center p-5">
         <AliceCarousel
           items={items}
           disableDotsControls
@@ -51,33 +54,40 @@ const HomeSectionCarousel = ({ data }) => {
           activeIndex={activeIndex}
           ref={carouselRef}
         />
+        {activeIndex !== 0 && (
+          <Button
+            onClick={slidePrev}
+            className="absolute top-1/2 left-0 transform -translate-y-1/2 z-50"
+            style={{
+              backgroundColor: "white",
+              color: "black",
+              border: "1px solid",
+              borderRadius: "5px",
+              borderColor: "indigo",
+            }}
+            aria-label="previous"
+          >
+            <KeyboardArrowLeftIcon sx={{ color: "indigo" }} />
+          </Button>
+        )}
+        {activeIndex !==
+          items.length - Math.min(responsive[1024].items, items.length) && (
+          <Button
+            onClick={slideNext}
+            className="absolute top-1/2 right-0 transform -translate-y-1/2 z-50"
+            style={{
+              backgroundColor: "white",
+              color: "black",
+              border: "1px solid",
+              borderRadius: "5px",
+              borderColor: "indigo",
+            }}
+            aria-label="next"
+          >
+            <KeyboardArrowRightIcon sx={{ color: "indigo" }} />
+          </Button>
+        )}
       </div>
-      {activeIndex !== 0 && (
-        <Button
-          onClick={slidePrev}
-          className="absolute top-1/2 left-0 transform -translate-y-1/2 z-50"
-          style={{
-            backgroundColor: "white",
-            color: "black",
-          }}
-          aria-label="previous"
-        >
-          <KeyboardArrowLeftIcon sx={{ color: "indigo" }} />
-        </Button>
-      )}
-      {activeIndex !== items.length - 5 && (
-        <Button
-          onClick={slideNext}
-          className="absolute top-1/2 right-0 transform -translate-y-1/2 z-50"
-          style={{
-            backgroundColor: "white",
-            color: "black",
-          }}
-          aria-label="next"
-        >
-          <KeyboardArrowRightIcon sx={{ color: "indigo" }} />
-        </Button>
-      )}
     </div>
   );
 };

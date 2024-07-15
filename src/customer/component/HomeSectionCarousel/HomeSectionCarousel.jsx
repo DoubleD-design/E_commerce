@@ -14,7 +14,7 @@ const HomeSectionCarousel = ({ data, sectionName }) => {
   const responsive = {
     0: { items: 1 },
     720: { items: 3 },
-    1024: { items: 5 },
+    1024: { items: 5.5 },
   };
 
   const slidePrev = () => {
@@ -70,8 +70,7 @@ const HomeSectionCarousel = ({ data, sectionName }) => {
             <KeyboardArrowLeftIcon sx={{ color: "indigo" }} />
           </Button>
         )}
-        {activeIndex !==
-          items.length - Math.min(responsive[1024].items, items.length) && (
+        {activeIndex !== items.length - 5 && (
           <Button
             onClick={slideNext}
             className="absolute top-1/2 right-0 transform -translate-y-1/2 z-50"

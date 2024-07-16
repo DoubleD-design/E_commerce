@@ -5,6 +5,7 @@ import { Button } from "@headlessui/react";
 import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import "react-alice-carousel/lib/alice-carousel.css";
+import { ButtonBase } from "@mui/material";
 
 const HomeSectionCarousel = ({ data, sectionName }) => {
   const [activeIndex, setActiveIndex] = useState(0);

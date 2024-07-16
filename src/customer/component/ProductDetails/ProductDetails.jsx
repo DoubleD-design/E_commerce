@@ -1,8 +1,12 @@
 import { useState } from "react";
 import { StarIcon } from "@heroicons/react/20/solid";
 import { Radio, RadioGroup } from "@headlessui/react";
-import { Button, Grid, Rating } from "@mui/material";
+import { Box, Button, Grid, LinearProgress, Rating } from "@mui/material";
 import ProductReviewCard from "./ProductReviewCard";
+import { mens_catalogy } from "../../../Data/mens_catalogy";
+import HomeSectionCard from "../HomeSectionCard/HomeSectionCard";
+import { makeStyles } from "@mui/material";
+import { styled } from "@mui/material/styles";
 
 const product = {
   name: "Basic Tee 6-Pack",
@@ -58,12 +62,19 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
+const StyledButton = styled(Button)(({ theme, color = "primary" }) => ({
+  ":hover": {
+    color: "white",
+    backgroundColor: "#4f46e5",
+  },
+}));
+
 export default function ProductDetails() {
   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
   const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
 
   return (
-    <div className="bg-white">
+    <div className="bg-white lg:px-20">
       <div className="pt-6">
         <nav aria-label="Breadcrumb">
           <ol
@@ -214,7 +225,7 @@ export default function ProductDetails() {
                   </fieldset>
                 </div>
 
-                <Button
+                <StyledButton
                   variant="contained"
                   sx={{
                     px: "2rem",
@@ -224,7 +235,7 @@ export default function ProductDetails() {
                   }}
                 >
                   Add To Cart
-                </Button>
+                </StyledButton>
               </form>
             </div>
 
@@ -269,14 +280,107 @@ export default function ProductDetails() {
         {/* rating and reviews */}
         <section>
           <h1 className="font-semibold text-lg pb-4">Recent Review & Rating</h1>
-          <div className="border p-5">
+          <div
+            className="border p-5"
+            style={{ borderRadius: "10px", borderColor: "#4f46e5" }}
+          >
             <Grid container spacing={7}>
               <Grid item xs={7}>
                 <div className="space-y-5">
-                  <ProductReviewCard />
+                  {[1, 1, 1].map((item) => (
+                    <ProductReviewCard />
+                  ))}
                 </div>
               </Grid>
+              <Grid item xs={5}>
+                <h1 className="text-xl font-semibold pb-2">Product Ratings</h1>
+                <div className="flex items-cente space-x-3">
+                  <Rating
+                    name="read-only"
+                    value={4.6}
+                    precision={0.5}
+                    readOnly
+                  />
+                  <p className="opacity-60">5946890 Ratings</p>
+                </div>
+                <Box className="mt-5 space-y-3" sx={{ borderRadius: "16px" }}>
+                  <Grid container alignItems="center">
+                    <Grid item xs={2}>
+                      <p>Exellent</p>
+                    </Grid>
+                    <Grid item xs={7}>
+                      <LinearProgress
+                        sx={{ bgcolor: "#d0d0d0", borderRadius: 4, height: 7 }}
+                        variant="determinate"
+                        value={40}
+                        color="secondary"
+                      ></LinearProgress>
+                    </Grid>
+                  </Grid>
+                  <Grid container alignItems="center">
+                    <Grid item xs={2}>
+                      <p>Very good</p>
+                    </Grid>
+                    <Grid item xs={7}>
+                      <LinearProgress
+                        sx={{ bgcolor: "#d0d0d0", borderRadius: 4, height: 7 }}
+                        variant="determinate"
+                        value={30}
+                        color="success"
+                      ></LinearProgress>
+                    </Grid>
+                  </Grid>
+                  <Grid container alignItems="center">
+                    <Grid item xs={2}>
+                      <p>Good</p>
+                    </Grid>
+                    <Grid item xs={7}>
+                      <LinearProgress
+                        sx={{ bgcolor: "#d0d0d0", borderRadius: 4, height: 7 }}
+                        variant="determinate"
+                        value={25}
+                        color="primary"
+                      ></LinearProgress>
+                    </Grid>
+                  </Grid>
+                  <Grid container alignItems="center">
+                    <Grid item xs={2}>
+                      <p>Average</p>
+                    </Grid>
+                    <Grid item xs={7}>
+                      <LinearProgress
+                        sx={{ bgcolor: "#d0d0d0", borderRadius: 4, height: 7 }}
+                        variant="determinate"
+                        value={20}
+                        color="warning"
+                      ></LinearProgress>
+                    </Grid>
+                  </Grid>
+                  <Grid container alignItems="center">
+                    <Grid item xs={2}>
+                      <p>Poor</p>
+                    </Grid>
+                    <Grid item xs={7}>
+                      <LinearProgress
+                        sx={{ bgcolor: "#d0d0d0", borderRadius: 4, height: 7 }}
+                        variant="determinate"
+                        value={15}
+                        color="error"
+                      ></LinearProgress>
+                    </Grid>
+                  </Grid>
+                </Box>
+              </Grid>
             </Grid>
+          </div>
+        </section>
+        {/* Similar Products */}
+        <section className="mt-5">
+          <h1 className="py-5 text-xl font-bold">Similar Products</h1>
+          <div className="flex flex-wrap gap-5 justify-between">
+            {mens_catalogy.map((item) => (
+              <HomeSectionCard key={item.id} product={item} />
+            ))}
           </div>
         </section>
       </div>

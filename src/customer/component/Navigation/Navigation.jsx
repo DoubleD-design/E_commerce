@@ -10,6 +10,7 @@ import {
 import { Avatar, Button, Menu, MenuItem } from "@mui/material";
 import { navigation } from "./navigationData";
 import { deepPurple } from "@mui/material/colors";
+import { useNavigate } from "react-router-dom";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -21,6 +22,13 @@ export default function Navigation() {
   const [anchorEl, setAnchorEl] = useState(null);
   const openUserMenu = Boolean(anchorEl);
   const jwt = localStorage.getItem("jwt");
+  const navigate = useNavigate();
+  const handleCartDetails = () => {
+    navigate("/cart");
+  };
+  const handleHomePage = () => {
+    navigate("/");
+  };
 
   const handleUserClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -37,7 +45,7 @@ export default function Navigation() {
   };
 
   const handleCategoryClick = (category, section, item, close) => {
-    // navigate(`/${category.id}/${section.id}/${item.id}`);
+    navigate(`/${category.id}/${section.id}/${item.id}`);
     close();
   };
 
@@ -152,9 +160,19 @@ export default function Navigation() {
                             >
                               {section.items.map((item) => (
                                 <li key={item.name} className="flow-root">
-                                  <p className="-m-2 block p-2 text-gray-500">
-                                    {"item.name"}
-                                  </p>
+                                  <button
+                                    className="-m-2 block p-2 text-gray-500"
+                                    onClick={() =>
+                                      handleCategoryClick(
+                                        category,
+                                        section,
+                                        item,
+                                        setOpen
+                                      )
+                                    } // Close mobile menu on click
+                                  >
+                                    {item.name}
+                                  </button>
                                 </li>
                               ))}
                             </ul>
@@ -226,7 +244,10 @@ export default function Navigation() {
               </button>
 
               {/* Logo */}
-              <div className="ml-4 flex lg:ml-0">
+              <div
+                onClick={handleHomePage}
+                className="ml-4 flex lg:ml-0 cursor-pointer"
+              >
                 <span className="sr-only">Your Company</span>
                 <img
                   src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
@@ -326,7 +347,7 @@ export default function Navigation() {
                                                 key={item.name}
                                                 className="flex"
                                               >
-                                                <p
+                                                <button
                                                   onClick={() =>
                                                     handleCategoryClick(
                                                       category,
@@ -338,7 +359,7 @@ export default function Navigation() {
                                                   className="cursor-pointer hover:text-gray-800"
                                                 >
                                                   {item.name}
-                                                </p>
+                                                </button>
                                               </li>
                                             ))}
                                           </ul>
@@ -433,7 +454,10 @@ export default function Navigation() {
 
                 {/* Cart */}
                 <div className="ml-4 flow-root lg:ml-6">
-                  <Button className="group -m-2 flex items-center p-2">
+                  <Button
+                    onClick={handleCartDetails}
+                    className="group -m-2 flex items-center p-2"
+                  >
                     <ShoppingBagIcon
                       className="h-6 w-6 flex-shrink-0 text-gray-400 group-hover:text-gray-500"
                       aria-hidden="true"

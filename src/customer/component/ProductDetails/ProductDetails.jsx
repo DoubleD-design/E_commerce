@@ -7,6 +7,7 @@ import { mens_catalogy } from "../../../Data/mens_catalogy";
 import HomeSectionCard from "../HomeSectionCard/HomeSectionCard";
 import { makeStyles } from "@mui/material";
 import { styled } from "@mui/material/styles";
+import { useNavigate } from "react-router-dom";
 
 const product = {
   name: "Basic Tee 6-Pack",
@@ -72,6 +73,10 @@ const StyledButton = styled(Button)(({ theme, color = "primary" }) => ({
 export default function ProductDetails() {
   const [selectedColor, setSelectedColor] = useState(product.colors[0]);
   const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
+  const navigation = useNavigate();
+  const handleAddToCart = () => {
+    navigation("/cart");
+  };
 
   return (
     <div className="bg-white lg:px-20">
@@ -226,12 +231,15 @@ export default function ProductDetails() {
                 </div>
 
                 <StyledButton
+                  onClick={handleAddToCart}
                   variant="contained"
                   sx={{
                     px: "2rem",
                     py: "1rem",
                     bgcolor: "#6366f1",
                     marginTop: "1rem",
+                    marginBottom: "2rem",
+                    width: "100%",
                   }}
                 >
                   Add To Cart
@@ -256,7 +264,7 @@ export default function ProductDetails() {
                   Highlights
                 </h3>
 
-                <div className="mt-4">
+                <div className="mt-4 ">
                   <ul role="list" className="list-disc space-y-2 pl-4 text-sm">
                     {product.highlights.map((highlight) => (
                       <li key={highlight} className="text-gray-400">

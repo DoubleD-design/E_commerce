@@ -2,6 +2,7 @@ import React from "react";
 import CartItem from "./CartItem";
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
+import { useNavigate } from "react-router-dom";
 
 const StyledButton = styled(Button)(({ theme, color = "primary" }) => ({
   ":hover": {
@@ -11,6 +12,10 @@ const StyledButton = styled(Button)(({ theme, color = "primary" }) => ({
 }));
 
 const Cart = () => {
+  const navigate = useNavigate();
+  const handleCheckout = () => {
+    navigate("/checkout?step=1");
+  };
   return (
     <div className="min-h-screen">
       <div className="lg:grid grid-cols-3 lg:px-16 relative">
@@ -44,6 +49,7 @@ const Cart = () => {
                 <span>$499</span>
               </div>
               <StyledButton
+                onClick={handleCheckout}
                 variant="contained"
                 sx={{
                   px: "2rem",

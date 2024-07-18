@@ -7,6 +7,8 @@ import Footer from "../customer/component/Footer/Footer";
 import Product from "../customer/component/Product/Product";
 import HomePage from "../customer/pages/HomePage/HomePage";
 import ProductDetails from "../customer/component/ProductDetails/ProductDetails";
+import Checkout from "../customer/component/Checkout/Checkout";
+import OrderDetails from "../customer/component/Order/OrderDetails";
 
 const CustomerRouters = () => {
   return (
@@ -25,9 +27,14 @@ const CustomerRouters = () => {
           path="/product/:productId"
           element={<ProductDetails />}
         ></Route>
-        {/* <Route path="/" element={<Order/>}>
-        </Route> */}
-        {/* <Checkout /> */}
+        <Route
+          path="/checkout"
+          element={<Checkout />}
+        ></Route>
+        <Route path="/account/order" element={<Order/>}>
+        </Route>
+        <Route path="/account/order/:orderId" element={<OrderDetails/>}>
+        </Route>
         {/* <Order/> */}
         {/* <OrderDetails /> */}
       </Routes>

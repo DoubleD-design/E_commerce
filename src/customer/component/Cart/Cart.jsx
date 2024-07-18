@@ -12,20 +12,16 @@ const StyledButton = styled(Button)(({ theme, color = "primary" }) => ({
 
 const Cart = () => {
   return (
-    <div>
+    <div className="min-h-screen">
       <div className="lg:grid grid-cols-3 lg:px-16 relative">
         <div className="col-span-2 mb-10">
           {[1, 1, 1, 1].map((item, index) => (
-            <div key={index} className="mb-5">
-              {" "}
-              {/* Add margin-bottom to each CartItem */}
+            <div key={index} className="mb-4">
               <CartItem />
             </div>
           ))}
         </div>
-        <div className="px-5 lg:sticky lg:top-0 h-[100vh] mt-5 lg:mt-0">
-          {" "}
-          {/* Use sticky directly here */}
+        <div className="px-5 sticky top-0 mt-5 lg:mt-0 h-fit">
           <div className="border px-5 py-5" style={{ borderRadius: "5px" }}>
             <p className="uppercase font-bold opacity-60 pb-4">Price Details</p>
             <hr />
@@ -59,7 +55,7 @@ const Cart = () => {
                   fontSize: "100%",
                 }}
               >
-                Purchase
+                Check Out
               </StyledButton>
             </div>
           </div>

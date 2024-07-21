@@ -45,7 +45,7 @@ const HomeSectionCarousel = ({ data, sectionName }) => {
       <h2 className="text-2xl font-extrabold text-gray-800 py-5">
         {sectionName}
       </h2>
-      <div className="relative flex items-center p-5">
+      <div className="relative flex bg-white items-center p-5">
         <AliceCarousel
           items={items}
           disableDotsControls
@@ -58,7 +58,7 @@ const HomeSectionCarousel = ({ data, sectionName }) => {
         {activeIndex !== 0 && (
           <Button
             onClick={slidePrev}
-            className="absolute top-1/2 left-0 transform -translate-y-1/2 z-50"
+            className="absolute top-1/2 left-[-12px] transform -translate-y-1/2 z-50"
             style={{
               backgroundColor: "white",
               color: "black",
@@ -74,7 +74,7 @@ const HomeSectionCarousel = ({ data, sectionName }) => {
         {activeIndex !== items.length - 5 && (
           <Button
             onClick={slideNext}
-            className="absolute top-1/2 right-0 transform -translate-y-1/2 z-50"
+            className="absolute top-1/2 right-[-12px] transform -translate-y-1/2 z-50"
             style={{
               backgroundColor: "white",
               color: "black",

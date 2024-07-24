@@ -1,12 +1,14 @@
 package com.example.model;
 
 import jakarta.persistence.Embeddable;
-import jakarta.persistence.Entity;
 
 @Embeddable
 public class Size {
     private String name;
     private int quantity;
+
+    public Size() {
+    }
 
     public String getName() {
         return name;
@@ -23,6 +25,4 @@ public class Size {
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
-
-    public Size(){}
 }

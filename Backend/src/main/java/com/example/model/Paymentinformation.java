@@ -1,10 +1,10 @@
 package com.example.model;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 
 import java.time.LocalDate;
-import java.util.Date;
-
+@Embeddable
 public class Paymentinformation {
     @Column(name = "cardholder_name")
     private String cardholderName;

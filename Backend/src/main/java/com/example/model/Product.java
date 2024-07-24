@@ -1,6 +1,7 @@
 package com.example.model;
 
 import jakarta.persistence.*;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -21,7 +22,7 @@ public class Product {
     @Column(name = "discounted_price")
     private int discountedPrice;
 
-    @Column(name="discount_persent")
+    @Column(name = "discount_persent")
     private int discountPersent;
 
     private int quantity;
@@ -47,10 +48,11 @@ public class Product {
     private int numRatings;
 
     @ManyToOne
-    @JoinColumn(name="category_id")
+    @JoinColumn(name = "category_id")
     private Category category;
 
-    public Product() {}
+    public Product() {
+    }
 
     public Product(Long id, String title, String description, int price, int discountedPrice, int discountPersent, int quantity, String brand, String color, Set<Size> sizes, String imageUrl, List<Rating> ratings, List<Review> reviews, int numRatings, Category category) {
         this.id = id;

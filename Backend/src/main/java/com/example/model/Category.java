@@ -12,11 +12,13 @@ public class Category {
     @NotNull
     @Size(max = 50)
     private String name;
-    @ManyToOne (fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "parent_category_id")
     private Category parentCategory;
     private int level;
-    public Category(){}
+
+    public Category() {
+    }
 
     public Category(Long id, String name, Category parentCategory, int level) {
         super();

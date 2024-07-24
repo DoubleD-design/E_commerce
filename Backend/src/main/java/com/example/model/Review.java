@@ -1,7 +1,6 @@
 package com.example.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.annotation.Generated;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -13,15 +12,16 @@ public class Review {
     private Long id;
     private String review;
     @ManyToOne
-    @JoinColumn(name="product_id")
+    @JoinColumn(name = "product_id")
     @JsonIgnore
     private Product product;
     @ManyToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user_id")
     private User user;
     private LocalDateTime createdAt;
 
-    public Review(){}
+    public Review() {
+    }
 
     public Review(Long id, String review, Product product, User user, LocalDateTime createdAt) {
         super();

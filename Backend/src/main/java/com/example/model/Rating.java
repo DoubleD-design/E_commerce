@@ -1,7 +1,6 @@
 package com.example.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import jakarta.annotation.Generated;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -26,7 +25,8 @@ public class Rating {
 
     private LocalDateTime createdAt;
 
-    public Rating(){}
+    public Rating() {
+    }
 
     public Rating(Long id, User user, Product product, double rating, LocalDateTime createdAt) {
         super();
@@ -40,6 +40,7 @@ public class Rating {
     public LocalDateTime getCreatedAt() {
         return createdAt;
     }
+
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }

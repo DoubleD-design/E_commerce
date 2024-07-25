@@ -2,6 +2,7 @@ package com.example.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -51,6 +52,9 @@ public class Product {
     @JoinColumn(name = "category_id")
     private Category category;
 
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
     public Product() {
     }
 
@@ -70,6 +74,7 @@ public class Product {
         this.reviews = reviews;
         this.numRatings = numRatings;
         this.category = category;
+        this.createdAt = LocalDateTime.now();
     }
 
     // Getters and setters
@@ -192,5 +197,9 @@ public class Product {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public void setCreatedAt(LocalDateTime now) {
+        this.createdAt = now;
     }
 }

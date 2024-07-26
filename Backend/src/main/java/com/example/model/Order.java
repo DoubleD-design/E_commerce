@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@Table(name = "`order`")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -27,5 +28,19 @@ public class Order {
 
     @OneToOne
     private Address shippingAddress;
+    @Embedded
+    private PaymentDetails paymentDetails = new PaymentDetails();
+
+    private double totalPrice;
+
+    private Integer totalDiscountPrice;
+
+    private Integer discount;
+
+    private String orderStatus;
+
+    private int totalItem;
+
+    private  LocalDateTime createdAt;
 
 }

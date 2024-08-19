@@ -11,12 +11,12 @@ import java.util.List;
 import com.example.repository.CartRepository;
 
 @Service
-public class OrderServiceImplement implements OrderService{
+public class OrderServiceImplementation implements OrderService{
     private CartRepository cartRepository;
     private CartItemService cartItemService;
     private ProductService productService;
 
-    public OrderServiceImplement(CartRepository cartRepository, CartItemService cartItemService, ProductService productService) {
+    public OrderServiceImplementation(CartRepository cartRepository, CartItemService cartItemService, ProductService productService) {
         this.cartRepository = cartRepository;
         this.cartItemService = cartItemService;
         this.productService = productService;

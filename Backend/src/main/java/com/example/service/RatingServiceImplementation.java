@@ -8,6 +8,7 @@ import com.example.repository.RatingRepository;
 import com.example.request.RatingRequest;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -22,11 +23,15 @@ public class RatingServiceImplementation implements RatingService {
     public Rating createRating(RatingRequest request, User user) throws ProductException {
         Product product = productService.findProductById(request.getProductId());
         Rating rating = new Rating();
-
+        rating.setProduct(product);
+        rating.setUser(user);
+        rating.setRating(request.getRating());
+        rating.setCreatedAt(LocalDateTime.now());
+        return ratingRepository.save(rating);
     }
 
     @Override
     public List<Rating> getProductsRating(Long productId) {
-        return List.of();
+        return ratingRepository.getAllProductsRating(productId);
     }
 }

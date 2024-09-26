@@ -1,8 +1,11 @@
-import { Box, Grid, TextField } from "@mui/material";
-import React from "react";
-import AddressCard from "../AddressCard/AddressCard";
-import { styled } from "@mui/material/styles";
-import Button from "@mui/material/Button";
+import * as React from "react";
+import { Grid, TextField, Button, Box } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { createOrder } from "../../../Redux/Customers/Order/Action";
+import userEvent from "@testing-library/user-event";
+import AddressCard from "../adreess/AdreessCard";
+import { useState } from "react";
 const StyledButton = styled(Button)(({ theme, color = "primary" }) => ({
   ":hover": {
     color: "white",
@@ -10,10 +13,18 @@ const StyledButton = styled(Button)(({ theme, color = "primary" }) => ({
   },
 }));
 
-const DeliveryAddressForm = (e) => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const data = new FormData(e.currentTarget);
+export default function DeliveryAddressForm({ handleNext }) {
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const jwt = localStorage.getItem("jwt");
+  const { auth } = useSelector((store) => store);
+  const [selectedAddress, setSelectedAdress] = useState(null);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    // eslint-disable-next-line no-console
+
     const address = {
       firstName: data.get("firstName"),
       lastName: data.get("lastName"),
@@ -23,137 +34,144 @@ const DeliveryAddressForm = (e) => {
       zipCode: data.get("zip"),
       mobile: data.get("phoneNumber"),
     };
-    console.log("address", address);
-  };
-  return (
-    <div className="flex flex-wrap justify-evenly">
-      <Grid container>
-        <Grid
-          xs={12}
-          lg={4.75}
-          //   className="border rounded-e-md shadow-md h-[30rem] overflow-y-scroll"
-          className="border rounded-lg shadow-md h-[31.5rem] overflow-y-scroll"
-        >
-          <div className="border-b pl-3">
-            <AddressCard />
-            <StyledButton
-              variant="contained"
-              sx={{
-                bgcolor: "#6366f1",
-                // marginTop: "1rem",
-                marginBottom: "1rem",
-              }}
-              size="large"
-              type="submit"
-            >
-              Delivery Here
-            </StyledButton>
-          </div>
-        </Grid>
-        <Grid item xs={12} lg={0.25}>
-          <span></span>
-        </Grid>
-        <Grid item xs={12} lg={7}>
-          <Box className="border rounded-lg shadow-md p-5">
-            <form onSubmit={handleSubmit}>
-              <Grid container spacing={3}>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    required
-                    id="firstName"
-                    name="firstName"
-                    label="First Name"
-                    fullWidth
-                    autoComplete="given-name"
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    required
-                    id="lastName"
-                    name="lastName"
-                    label="Last Name"
-                    fullWidth
-                    autoComplete="given-name"
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    required
-                    id="address"
-                    name="address"
-                    label="Address"
-                    fullWidth
-                    autoComplete="given-name"
-                    multiline
-                    rows={4}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    required
-                    id="city"
-                    name="city"
-                    label="City"
-                    fullWidth
-                    autoComplete="given-name"
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    required
-                    id="state"
-                    name="state"
-                    label="State/Province/Region"
-                    fullWidth
-                    autoComplete="given-name"
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    required
-                    id="zip"
-                    name="zip"
-                    label="Zip/Postal Code"
-                    fullWidth
-                    autoComplete="shipping postal-code"
-                  />
-                </Grid>
-                <Grid item xs={12} sm={6}>
-                  <TextField
-                    required
-                    id="phoneNumber"
-                    name="phoneNumber"
-                    label="Phone Number"
-                    fullWidth
-                    autoComplete="given-name"
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <StyledButton
-                    variant="contained"
-                    sx={{
-                      mt: 2,
-                      px: "0.5rem",
-                      py: "0.5rem",
-                      bgcolor: "#6366f1",
-                      marginTop: "1rem",
-                      marginBottom: "1rem",
-                      width: "100%",
-                    }}
-                    size="large"
-                    type="submit"
-                  >
-                    Delivery Here
-                  </StyledButton>
-                </Grid>
-              </Grid>
-            </form>
-          </Box>
-        </Grid>
-      </Grid>
-    </div>
-  );
-};
 
-export default DeliveryAddressForm;
+    dispatch(createOrder({ address, jwt, navigate }));
+    // after perfoming all the opration
+    handleNext();
+  };
+
+  const handleCreateOrder = (item) => {
+    dispatch(createOrder({ address: item, jwt, navigate }));
+    handleNext();
+  };
+
+  return (
+    <Grid container spacing={4}>
+      <Grid item xs={12} lg={5}>
+        <Box className="border rounded-md shadow-md h-[30.5rem] overflow-y-scroll ">
+          {auth.user?.addresses.map((item) => (
+            <div
+              onClick={() => setSelectedAdress(item)}
+              className="p-5 py-7 border-b cursor-pointer"
+            >
+              {" "}
+              <AddressCard address={item} />
+              {selectedAddress?.id === item.id && (
+                <StyledButton
+                  variant="contained"
+                  sx={{
+                    bgcolor: "#6366f1",
+                    // marginTop: "1rem",
+                    marginBottom: "1rem",
+                  }}
+                  size="large"
+                  type="submit"
+                  onClick={() => handleCreateOrder(item)}
+                >
+                  Deliverd Here
+                </StyledButton>
+              )}
+            </div>
+          ))}
+        </Box>
+      </Grid>
+      <Grid item xs={12} lg={7}>
+        <Box className="border rounded-md shadow-md p-5">
+          <form onSubmit={handleSubmit}>
+            <Grid container spacing={3}>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  id="firstName"
+                  name="firstName"
+                  label="First Name"
+                  fullWidth
+                  autoComplete="given-name"
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  id="lastName"
+                  name="lastName"
+                  label="Last Name"
+                  fullWidth
+                  autoComplete="given-name"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  required
+                  id="address"
+                  name="address"
+                  label="Address"
+                  fullWidth
+                  autoComplete="shipping address"
+                  multiline
+                  rows={4}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  id="city"
+                  name="city"
+                  label="City"
+                  fullWidth
+                  autoComplete="shipping address-level2"
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  id="state"
+                  name="state"
+                  label="State/Province/Region"
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  id="zip"
+                  name="zip"
+                  label="Zip / Postal code"
+                  fullWidth
+                  autoComplete="shipping postal-code"
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  id="phoneNumber"
+                  name="phoneNumber"
+                  label="Phone Number"
+                  fullWidth
+                  autoComplete="tel"
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <StyledButton
+                  variant="contained"
+                  sx={{
+                    mt: 2,
+                    px: "0.5rem",
+                    py: "0.5rem",
+                    bgcolor: "#6366f1",
+                    marginTop: "1rem",
+                    marginBottom: "1rem",
+                    width: "100%",
+                  }}
+                  size="large"
+                  type="submit"
+                >
+                  Deliverd Here
+                </StyledButton>
+              </Grid>
+            </Grid>
+          </form>
+        </Box>
+      </Grid>
+    </Grid>
+  );
+}

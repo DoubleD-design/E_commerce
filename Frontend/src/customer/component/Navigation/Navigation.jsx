@@ -7,10 +7,15 @@ import {
   XMarkIcon,
 } from "@heroicons/react/24/outline";
 
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Avatar, Button, Menu, MenuItem } from "@mui/material";
-import { navigation } from "./navigationData";
+import { navigation } from "../../../config/navigationMenu";
+import AuthModal from "../Auth/AuthModal";
+import { useDispatch, useSelector } from "react-redux";
 import { deepPurple } from "@mui/material/colors";
-import { useNavigate } from "react-router-dom";
+import { getUser, logout } from "../../../Redux/Auth/Action";
+import { getCart } from "../../../Redux/Customers/Cart/Action";
+import TextField from "@mui/material/TextField";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -18,17 +23,21 @@ function classNames(...classes) {
 
 export default function Navigation() {
   const [open, setOpen] = useState(false);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { auth, cart } = useSelector((store) => store);
   const [openAuthModal, setOpenAuthModal] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const openUserMenu = Boolean(anchorEl);
   const jwt = localStorage.getItem("jwt");
-  const navigate = useNavigate();
-  const handleCartDetails = () => {
-    navigate("/cart");
-  };
-  const handleHomePage = () => {
-    navigate("/");
-  };
+  const location = useLocation();
+
+  useEffect(() => {
+    if (jwt) {
+      dispatch(getUser(jwt));
+      dispatch(getCart(jwt));
+    }
+  }, [jwt]);
 
   const handleUserClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -47,6 +56,26 @@ export default function Navigation() {
   const handleCategoryClick = (category, section, item, close) => {
     navigate(`/${category.id}/${section.id}/${item.id}`);
     close();
+  };
+
+  useEffect(() => {
+    if (auth.user) {
+      handleClose();
+    }
+    if (location.pathname === "/login" || location.pathname === "/register") {
+      navigate(-1);
+    }
+  }, [auth.user]);
+
+  const handleLogout = () => {
+    handleCloseUserMenu();
+    dispatch(logout());
+  };
+  const handleMyOrderClick = () => {
+    handleCloseUserMenu();
+    auth.user?.role === "ROLE_ADMIN"
+      ? navigate("/admin")
+      : navigate("/account/order");
   };
 
   return (
@@ -160,19 +189,9 @@ export default function Navigation() {
                             >
                               {section.items.map((item) => (
                                 <li key={item.name} className="flow-root">
-                                  <button
-                                    className="-m-2 block p-2 text-gray-500"
-                                    onClick={() =>
-                                      handleCategoryClick(
-                                        category,
-                                        section,
-                                        item,
-                                        setOpen
-                                      )
-                                    } // Close mobile menu on click
-                                  >
-                                    {item.name}
-                                  </button>
+                                  <p className="-m-2 block p-2 text-gray-500">
+                                    {"item.name"}
+                                  </p>
                                 </li>
                               ))}
                             </ul>
@@ -228,7 +247,7 @@ export default function Navigation() {
 
       <header className="relative bg-white">
         <p className="flex h-10 items-center justify-center bg-indigo-600 px-4 text-sm font-medium text-white sm:px-6 lg:px-8">
-          Feel free, feel luxury and elegant
+          Get free delivery on orders over $100
         </p>
 
         <nav aria-label="Top" className="mx-auto">
@@ -244,16 +263,15 @@ export default function Navigation() {
               </button>
 
               {/* Logo */}
-              <div
-                onClick={handleHomePage}
-                className="ml-4 flex lg:ml-0 cursor-pointer"
-              >
-                <span className="sr-only">Your Company</span>
-                <img
-                  src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-                  alt="Shopwithzosh"
-                  className="h-8 w-8 mr-2"
-                />
+              <div className="ml-4 flex lg:ml-0">
+                <Link to="/">
+                  <span className="sr-only">Your Company</span>
+                  <img
+                    src="https://res.cloudinary.com/ddkso1wxi/image/upload/v1675919455/Logo/Copy_of_Zosh_Academy_nblljp.png"
+                    alt="Shopwithzosh"
+                    className="h-8 w-8 mr-2"
+                  />
+                </Link>
               </div>
 
               {/* Flyout menus */}
@@ -347,7 +365,7 @@ export default function Navigation() {
                                                 key={item.name}
                                                 className="flex"
                                               >
-                                                <button
+                                                <p
                                                   onClick={() =>
                                                     handleCategoryClick(
                                                       category,
@@ -359,7 +377,7 @@ export default function Navigation() {
                                                   className="cursor-pointer hover:text-gray-800"
                                                 >
                                                   {item.name}
-                                                </button>
+                                                </p>
                                               </li>
                                             ))}
                                           </ul>
@@ -390,7 +408,7 @@ export default function Navigation() {
 
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                  {true ? (
+                  {auth.user ? (
                     <div>
                       <Avatar
                         className="text-white"
@@ -405,7 +423,7 @@ export default function Navigation() {
                           cursor: "pointer",
                         }}
                       >
-                        R
+                        {auth.user?.firstName[0].toUpperCase()}
                       </Avatar>
                       {/* <Button
                         id="basic-button"
@@ -425,9 +443,12 @@ export default function Navigation() {
                           "aria-labelledby": "basic-button",
                         }}
                       >
-                        <MenuItem>Profile</MenuItem>
-                        <MenuItem onClick={()=>navigate("/account/order")}>My Orders</MenuItem>
-                        <MenuItem>Logout</MenuItem>
+                        <MenuItem onClick={handleMyOrderClick}>
+                          {auth.user?.role === "ROLE_ADMIN"
+                            ? "Admin Dashboard"
+                            : "My Orders"}
+                        </MenuItem>
+                        <MenuItem onClick={handleLogout}>Logout</MenuItem>
                       </Menu>
                     </div>
                   ) : (
@@ -442,7 +463,10 @@ export default function Navigation() {
 
                 {/* Search */}
                 <div className="flex items-center lg:ml-6">
-                  <p className="p-2 text-gray-400 hover:text-gray-500">
+                  <p
+                    onClick={() => navigate("/products/search")}
+                    className="p-2 text-gray-400 hover:text-gray-500"
+                  >
                     <span className="sr-only">Search</span>
 
                     <MagnifyingGlassIcon
@@ -455,7 +479,7 @@ export default function Navigation() {
                 {/* Cart */}
                 <div className="ml-4 flow-root lg:ml-6">
                   <Button
-                    onClick={handleCartDetails}
+                    onClick={() => navigate("/cart")}
                     className="group -m-2 flex items-center p-2"
                   >
                     <ShoppingBagIcon
@@ -463,7 +487,7 @@ export default function Navigation() {
                       aria-hidden="true"
                     />
                     <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
-                      2
+                      {cart.cart?.totalItem}
                     </span>
                     <span className="sr-only">items in cart, view bag</span>
                   </Button>
@@ -473,6 +497,7 @@ export default function Navigation() {
           </div>
         </nav>
       </header>
+      <AuthModal handleClose={handleClose} open={openAuthModal} />
     </div>
   );
 }

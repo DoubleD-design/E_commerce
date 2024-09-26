@@ -1,90 +1,95 @@
-import React, { useState, useEffect, useRef } from "react";
-import HomeSectionCard from "../HomeSectionCard/HomeSectionCard";
 import AliceCarousel from "react-alice-carousel";
-import { Button } from "@headlessui/react";
-import KeyboardArrowLeftIcon from "@mui/icons-material/KeyboardArrowLeft";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-import "react-alice-carousel/lib/alice-carousel.css";
-import { ButtonBase } from "@mui/material";
+import HomeProductCard from "./HomeProductCard";
+import { Button } from "@mui/material";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import { useState } from "react";
 
-const HomeSectionCarousel = ({ data, sectionName }) => {
+const HomeSectionCarousel = ({ section, data }) => {
   const [activeIndex, setActiveIndex] = useState(0);
-  const [itemCount, setItemCount] = useState(0);
-  const carouselRef = useRef(null);
+
+  const slidePrev = () => setActiveIndex(activeIndex - 1);
+  const slideNext = () => setActiveIndex(activeIndex + 1);
+  const syncActiveIndex = ({ item }) => setActiveIndex(item);
 
   const responsive = {
-    0: { items: 1 },
-    720: { items: 3 },
-    1024: { items: 5.5 },
+    0: {
+      items: 2,
+      itemsFit: "contain",
+    },
+    568: {
+      items: 3,
+      itemsFit: "contain",
+    },
+    1024: {
+      items: 5.5,
+      itemsFit: "contain",
+    },
   };
+  const items = data?.slice(0, 10).map((item) => (
+    <div className="">
+      {" "}
+      <HomeProductCard product={item} />
+    </div>
+  ));
 
-  const slidePrev = () => {
-    if (carouselRef.current) {
-      carouselRef.current.slidePrev();
-    }
-  };
-
-  const slideNext = () => {
-    if (carouselRef.current) {
-      carouselRef.current.slideNext();
-    }
-  };
-
-  const syncActiveIndex = (e) => setActiveIndex(e.item);
-
-  useEffect(() => {
-    setItemCount(data.length);
-  }, [data]);
-
-  const items = data
-    .slice(0, 10)
-    .map((item, index) => <HomeSectionCard key={index} product={item} />);
+  // const slideInFromRight = (t) => {
+  //   return `translateX(${100 - t * 100}%)`;
+  // };
 
   return (
-    <div className="border-t border-b border-indigo-300 relative">
-      <h2 className="text-2xl font-extrabold text-gray-800 py-5">
-        {sectionName}
-      </h2>
-      <div className="relative flex bg-white items-center p-5">
+    <div className="relative px-4 sm:px-6 lg:px-8 ">
+      <h2 className="text-2xl font-extrabold text-gray-900 py-5">{section}</h2>
+      <div className="relative border p-5">
         <AliceCarousel
-          items={items}
-          disableDotsControls
           disableButtonsControls
+          disableDotsControls
+          mouseTracking
+          items={items}
+          activeIndex={activeIndex}
           responsive={responsive}
           onSlideChanged={syncActiveIndex}
-          activeIndex={activeIndex}
-          ref={carouselRef}
+          animationType="fadeout"
+          animationDuration={2000}
         />
-        {activeIndex !== 0 && (
-          <Button
-            onClick={slidePrev}
-            className="absolute top-1/2 left-[-12px] transform -translate-y-1/2 z-50"
-            style={{
-              backgroundColor: "white",
-              color: "black",
-              border: "1px solid",
-              borderRadius: "5px",
-              borderColor: "indigo",
-            }}
-            aria-label="previous"
-          >
-            <KeyboardArrowLeftIcon sx={{ color: "indigo" }} />
-          </Button>
-        )}
         {activeIndex !== items.length - 5 && (
           <Button
             onClick={slideNext}
-            className="absolute top-1/2 right-[-12px] transform -translate-y-1/2 z-50"
-            style={{
-              backgroundColor: "white",
-              color: "black",
-              border: "1px solid",
-              borderRadius: "5px",
-              borderColor: "indigo",
+            variant="contained"
+            className="z-50 bg-[]"
+            sx={{
+              position: "absolute",
+              top: "8rem",
+              right: "0rem",
+              transform: "translateX(50%) rotate(90deg)",
+            }}
+            color="white"
+            aria-label="next"
+          >
+            <ArrowForwardIosIcon
+              className=""
+              sx={{ transform: "rotate(-90deg)" }}
+            />
+          </Button>
+        )}
+
+        {activeIndex !== 0 && (
+          <Button
+            onClick={slidePrev}
+            variant="contained"
+            className="z-50 bg-[]"
+            color="white"
+            sx={{
+              position: "absolute",
+              top: "8rem",
+              left: "0rem",
+              transform: "translateX(-50%)  rotate(90deg)",
             }}
             aria-label="next"
           >
-            <KeyboardArrowRightIcon sx={{ color: "indigo" }} />
+            <ArrowForwardIosIcon
+              className=""
+              sx={{ transform: " rotate(90deg)" }}
+            />
           </Button>
         )}
       </div>

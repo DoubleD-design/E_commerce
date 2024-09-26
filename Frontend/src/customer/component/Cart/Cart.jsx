@@ -1,72 +1,71 @@
 import React from "react";
 import CartItem from "./CartItem";
-import { styled } from "@mui/material/styles";
-import Button from "@mui/material/Button";
+import { Badge, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-
-const StyledButton = styled(Button)(({ theme, color = "primary" }) => ({
-  ":hover": {
-    color: "white",
-    backgroundColor: "#4f46e5",
-  },
-}));
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getCart } from "../../../Redux/Customers/Cart/Action";
 
 const Cart = () => {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const handleCheckout = () => {
-    navigate("/checkout?step=1");
-  };
+  const jwt = localStorage.getItem("jwt");
+  const {cart}=useSelector(store=>store);
+  console.log("cart ",cart)
+
+  useEffect(() => {
+    dispatch(getCart(jwt));
+  }, [jwt]);
+  
   return (
-    <div className="min-h-screen">
-      <div className="lg:grid grid-cols-3 lg:px-16 relative">
-        <div className="col-span-2 mb-10">
-          {[1, 1, 1, 1].map((item, index) => (
-            <div key={index} className="mb-4">
-              <CartItem />
-            </div>
+    <div className="">
+      {cart.cartItems.length>0 && <div className="lg:grid grid-cols-3 lg:px-16 relative">
+        <div className="lg:col-span-2 lg:px-5 bg-white">
+        <div className=" space-y-3">
+          {cart.cartItems.map((item) => (
+            <>
+              <CartItem item={item} showButton={true}/>
+            </>
           ))}
         </div>
-        <div className="px-5 sticky top-0 mt-5 lg:mt-0 h-fit">
-          <div className="border px-5 py-5" style={{ borderRadius: "5px" }}>
-            <p className="uppercase font-bold opacity-60 pb-4">Price Details</p>
+      </div>
+      <div className="px-5 sticky top-0 h-[100vh] mt-5 lg:mt-0 ">
+        <div className="border p-5 bg-white shadow-lg rounded-md">
+          <p className="font-bold opacity-60 pb-4">PRICE DETAILS</p>
+          <hr />
+
+          <div className="space-y-3 font-semibold">
+            <div className="flex justify-between pt-3 text-black ">
+              <span>Price ({cart.cart?.totalItem} item)</span>
+              <span>₹{cart.cart.totalPrice}</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Discount</span>
+              <span className="text-green-700">-₹{cart.cart?.discounte}</span>
+            </div>
+            <div className="flex justify-between">
+              <span>Delivery Charges</span>
+              <span className="text-green-700">Free</span>
+            </div>
             <hr />
-            <div className="space-y-2 font-semibold">
-              <div className="flex justify-between pt-1 text-black">
-                <span>Price</span>
-                <span>$1499</span>
-              </div>
-              <div className="flex justify-between pt-1 text-green-600">
-                <span className="text-black">Discount</span>
-                <span>- $1000</span>
-              </div>
-              <div className="flex justify-between pt-1 text-green-600">
-                <span className="text-black">Delivery Charge</span>
-                <span>Free</span>
-              </div>
-              <hr />
-              <div className="flex justify-between font-bold pt-1 text-green-600 pb-5">
-                <span className="text-black text-lg">Total Amount</span>
-                <span>$499</span>
-              </div>
-              <StyledButton
-                onClick={handleCheckout}
-                variant="contained"
-                sx={{
-                  px: "2rem",
-                  py: "1rem",
-                  bgcolor: "#6366f1",
-                  marginTop: "1rem",
-                  marginBottom: "1rem",
-                  width: "100%",
-                  fontSize: "100%",
-                }}
-              >
-                Check Out
-              </StyledButton>
+            <div className="flex justify-between font-bold text-lg">
+              <span>Total Amount</span>
+              <span className="text-green-700">₹{cart.cart?.totalDiscountedPrice}</span>
             </div>
           </div>
+
+          <Button
+            onClick={() => navigate("/checkout?step=2")}
+            variant="contained"
+            type="submit"
+            sx={{ padding: ".8rem 2rem", marginTop: "2rem", width: "100%" }}
+          >
+            Check Out
+          </Button>
         </div>
       </div>
+      </div>}
+      
     </div>
   );
 };

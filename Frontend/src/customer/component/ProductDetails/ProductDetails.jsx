@@ -1,17 +1,20 @@
 import { useState } from "react";
-import { StarIcon } from "@heroicons/react/20/solid";
-import { Radio, RadioGroup } from "@headlessui/react";
-import { Box, Button, Grid, LinearProgress, Rating } from "@mui/material";
+import { RadioGroup } from "@headlessui/react";
+import { useNavigate, useParams } from "react-router-dom";
 import ProductReviewCard from "./ProductReviewCard";
-import { mens_catalogy } from "../../../Data/mens_catalogy";
-import HomeSectionCard from "../HomeSectionCard/HomeSectionCard";
-import { makeStyles } from "@mui/material";
-import { styled } from "@mui/material/styles";
-import { useNavigate } from "react-router-dom";
+import { Box, Button, Grid, LinearProgress, Rating } from "@mui/material";
+import HomeSectionCard from "../../component/HomeSectionCard/HomeSectionCard";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { findProductById } from "../../../Redux/Customers/Product/Action";
+import { addItemToCart } from "../../../Redux/Customers/Cart/Action";
+import { getAllReviews } from "../../../Redux/Customers/Review/Action";
+import { lengha_page1 } from "../../../Data/Women/LenghaCholi";
+import { gounsPage1 } from "../../../Data/Gouns/gouns";
 
 const product = {
   name: "Basic Tee 6-Pack",
-  price: "$192",
+  price: "₹996",
   href: "#",
   breadcrumbs: [
     { id: 1, name: "Men", href: "#" },
@@ -44,7 +47,6 @@ const product = {
     { name: "S", inStock: true },
     { name: "M", inStock: true },
     { name: "L", inStock: true },
-    { name: "XL", inStock: true },
   ],
   description:
     'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
@@ -63,20 +65,31 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const StyledButton = styled(Button)(({ theme, color = "primary" }) => ({
-  ":hover": {
-    color: "white",
-    backgroundColor: "#4f46e5",
-  },
-}));
-
 export default function ProductDetails() {
-  const [selectedColor, setSelectedColor] = useState(product.colors[0]);
-  const [selectedSize, setSelectedSize] = useState(product.sizes[2]);
-  const navigation = useNavigate();
-  const handleAddToCart = () => {
-    navigation("/cart");
+  const [selectedSize, setSelectedSize] = useState();
+  const [activeImage, setActiveImage] = useState(null);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { customersProduct } = useSelector((store) => store);
+  const { productId } = useParams();
+  const jwt = localStorage.getItem("jwt");
+  // console.log("param",productId,customersProduct.product)
+
+  const handleSetActiveImage = (image) => {
+    setActiveImage(image);
   };
+
+  const handleSubmit = () => {
+    const data = { productId, size: selectedSize.name };
+    dispatch(addItemToCart({ data, jwt }));
+    navigate("/cart");
+  };
+
+  useEffect(() => {
+    const data = { productId: Number(productId), jwt };
+    dispatch(findProductById(data));
+    dispatch(getAllReviews(productId));
+  }, [productId]);
 
   return (
     <div className="bg-white lg:px-20">
@@ -90,16 +103,16 @@ export default function ProductDetails() {
               <li key={breadcrumb.id}>
                 <div className="flex items-center">
                   <a
-                    href={breadcrumb.href}
+                    href={"/"}
                     className="mr-2 text-sm font-medium text-gray-900"
                   >
                     {breadcrumb.name}
                   </a>
                   <svg
-                    fill="currentColor"
                     width={16}
                     height={20}
                     viewBox="0 0 16 20"
+                    fill="currentColor"
                     aria-hidden="true"
                     className="h-5 w-4 text-gray-300"
                   >
@@ -119,131 +132,162 @@ export default function ProductDetails() {
             </li>
           </ol>
         </nav>
-        <section className="grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-10 px-4 pt-10">
+
+        {/* product details */}
+        <section className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-2 px-4 pt-10">
           {/* Image gallery */}
-          <div className="flex flex-col items-center">
-            <div className="overflow-hidden rounded-lg max-w-[30rem] max-h-[35rem]">
+          <div className="flex flex-col items-center ">
+            <div className=" overflow-hidden rounded-lg max-w-[30rem] max-h-[35rem]">
               <img
+                src={activeImage?.src || customersProduct.product?.imageUrl}
                 alt={product.images[0].alt}
-                src={product.images[0].src}
                 className="h-full w-full object-cover object-center"
               />
             </div>
             <div className="flex flex-wrap space-x-5 justify-center">
-              {product.images.map((item) => (
-                <div className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg max-w-[5rem] max-h-[5rem] mt-4">
+              {product.images.map((image) => (
+                <div
+                  onClick={() => handleSetActiveImage(image)}
+                  className="aspect-h-2 aspect-w-3 overflow-hidden rounded-lg max-w-[5rem] max-h-[5rem] mt-4"
+                >
                   <img
-                    alt={item.alt}
-                    src={item.src}
+                    src={image.src}
+                    alt={product.images[1].alt}
                     className="h-full w-full object-cover object-center"
                   />
                 </div>
               ))}
             </div>
           </div>
+
           {/* Product info */}
-          <div className="lg:col-span-1 maxt-auto max-w-2xl px-4 pb-16 sm:px-6 lg:max-w-7xl lg:px-8 lg:pb-24">
-            <div className="lg:col-span-2 ">
-              <h1 className="text-lg lg:text-xl font-semibold text-gray-900">
-                Majestic Man
+          <div className="lg:col-span-1 mx-auto max-w-2xl px-4 pb-16 sm:px-6  lg:max-w-7xl  lg:px-8 lg:pb-24">
+            <div className="lg:col-span-2">
+              <h1 className="text-lg lg:text-xl font-semibold tracking-tight text-gray-900  ">
+                {customersProduct.product?.brand}
               </h1>
-              <h1 className="text-lg lg:text-xl text-gray-900 opacity-60 pt-1">
-                Men Printed Pure Cotton Straight Kurta
+              <h1 className="text-lg lg:text-xl tracking-tight text-gray-900 opacity-60 pt-1">
+                {customersProduct.product?.title}
               </h1>
             </div>
 
             {/* Options */}
             <div className="mt-4 lg:row-span-3 lg:mt-0">
               <h2 className="sr-only">Product information</h2>
-              <div className="flex space-x-5 items-center text-lg lg:text-xl text-gray-900 mt-6">
-                <p className="font-semibold">$499</p>
-                <p className="opacity-50 line-through">$1499</p>
-                <p className="text-green-600 font-semibold">66% Off</p>
+              <div className="flex space-x-5 items-center text-lg lg:text-xl tracking-tight text-gray-900 mt-6">
+                <p className="font-semibold">
+                  ₹{customersProduct.product?.discountedPrice}
+                </p>
+                <p className="opacity-50 line-through">
+                  ₹{customersProduct.product?.price}
+                </p>
+                <p className="text-green-600 font-semibold">
+                  {customersProduct.product?.discountPersent}% Off
+                </p>
               </div>
 
               {/* Reviews */}
               <div className="mt-6">
+                <h3 className="sr-only">Reviews</h3>
+
                 <div className="flex items-center space-x-3">
-                  <Rating name="read-only" value={5.5} readOnly />
-                  <p className="opacity-50 text-sm">56540 Ratings</p>
+                  <Rating
+                    name="read-only"
+                    value={4.6}
+                    precision={0.5}
+                    readOnly
+                  />
+
+                  <p className="opacity-60 text-sm">42807 Ratings</p>
                   <p className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500">
-                    3870 Reviews
+                    {reviews.totalCount} reviews
                   </p>
                 </div>
               </div>
 
-              <form className="mt-10">
+              <form className="mt-10" onSubmit={handleSubmit}>
                 {/* Sizes */}
                 <div className="mt-10">
                   <div className="flex items-center justify-between">
                     <h3 className="text-sm font-medium text-gray-900">Size</h3>
                   </div>
 
-                  <fieldset aria-label="Choose a size" className="mt-4">
-                    <RadioGroup
-                      value={selectedSize}
-                      onChange={setSelectedSize}
-                      className="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4"
-                    >
+                  <RadioGroup
+                    value={selectedSize}
+                    onChange={setSelectedSize}
+                    className="mt-4"
+                  >
+                    <RadioGroup.Label className="sr-only">
+                      Choose a size
+                    </RadioGroup.Label>
+                    <div className="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-10">
                       {product.sizes.map((size) => (
-                        <Radio
+                        <RadioGroup.Option
                           key={size.name}
                           value={size}
                           disabled={!size.inStock}
-                          className={classNames(
-                            size.inStock
-                              ? "cursor-pointer bg-white text-gray-900 shadow-sm"
-                              : "cursor-not-allowed bg-gray-50 text-gray-200",
-                            "group relative flex items-center justify-center rounded-md border px-4 py-3 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none data-[focus]:ring-2 data-[focus]:ring-indigo-500 sm:flex-1 sm:py-6"
-                          )}
+                          className={({ active }) =>
+                            classNames(
+                              size.inStock
+                                ? "cursor-pointer bg-white text-gray-900 shadow-sm"
+                                : "cursor-not-allowed bg-gray-50 text-gray-200",
+                              active ? "ring-1 ring-indigo-500" : "",
+                              "group relative flex items-center justify-center rounded-md border py-1 px-1 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6"
+                            )
+                          }
                         >
-                          <span>{size.name}</span>
-                          {size.inStock ? (
-                            <span
-                              aria-hidden="true"
-                              className="pointer-events-none absolute -inset-px rounded-md border-2 border-transparent group-data-[focus]:border group-data-[checked]:border-indigo-500"
-                            />
-                          ) : (
-                            <span
-                              aria-hidden="true"
-                              className="pointer-events-none absolute -inset-px rounded-md border-2 border-gray-200"
-                            >
-                              <svg
-                                stroke="currentColor"
-                                viewBox="0 0 100 100"
-                                preserveAspectRatio="none"
-                                className="absolute inset-0 h-full w-full stroke-2 text-gray-200"
-                              >
-                                <line
-                                  x1={0}
-                                  x2={100}
-                                  y1={100}
-                                  y2={0}
-                                  vectorEffect="non-scaling-stroke"
+                          {({ active, checked }) => (
+                            <>
+                              <RadioGroup.Label as="span">
+                                {size.name}
+                              </RadioGroup.Label>
+                              {size.inStock ? (
+                                <span
+                                  className={classNames(
+                                    active ? "border" : "border-2",
+                                    checked
+                                      ? "border-indigo-500"
+                                      : "border-transparent",
+                                    "pointer-events-none absolute -inset-px rounded-md"
+                                  )}
+                                  aria-hidden="true"
                                 />
-                              </svg>
-                            </span>
+                              ) : (
+                                <span
+                                  aria-hidden="true"
+                                  className="pointer-events-none absolute -inset-px rounded-md border-2 border-gray-200"
+                                >
+                                  <svg
+                                    className="absolute inset-0 h-full w-full stroke-2 text-gray-200"
+                                    viewBox="0 0 100 100"
+                                    preserveAspectRatio="none"
+                                    stroke="currentColor"
+                                  >
+                                    <line
+                                      x1={0}
+                                      y1={100}
+                                      x2={100}
+                                      y2={0}
+                                      vectorEffect="non-scaling-stroke"
+                                    />
+                                  </svg>
+                                </span>
+                              )}
+                            </>
                           )}
-                        </Radio>
+                        </RadioGroup.Option>
                       ))}
-                    </RadioGroup>
-                  </fieldset>
+                    </div>
+                  </RadioGroup>
                 </div>
 
-                <StyledButton
-                  onClick={handleAddToCart}
+                <Button
                   variant="contained"
-                  sx={{
-                    px: "2rem",
-                    py: "1rem",
-                    bgcolor: "#6366f1",
-                    marginTop: "1rem",
-                    marginBottom: "2rem",
-                    width: "100%",
-                  }}
+                  type="submit"
+                  sx={{ padding: ".8rem 2rem", marginTop: "2rem" }}
                 >
                   Add To Cart
-                </StyledButton>
+                </Button>
               </form>
             </div>
 
@@ -254,7 +298,7 @@ export default function ProductDetails() {
 
                 <div className="space-y-6">
                   <p className="text-base text-gray-900">
-                    {product.description}
+                    {customersProduct.product?.description}
                   </p>
                 </div>
               </div>
@@ -264,7 +308,7 @@ export default function ProductDetails() {
                   Highlights
                 </h3>
 
-                <div className="mt-4 ">
+                <div className="mt-4">
                   <ul role="list" className="list-disc space-y-2 pl-4 text-sm">
                     {product.highlights.map((highlight) => (
                       <li key={highlight} className="text-gray-400">
@@ -285,96 +329,159 @@ export default function ProductDetails() {
             </div>
           </div>
         </section>
-        {/* rating and reviews */}
-        <section>
-          <h1 className="font-semibold text-lg pb-4">Recent Review & Rating</h1>
-          <div
-            className="border p-5"
-            style={{ borderRadius: "10px", borderColor: "#4f46e5" }}
-          >
+
+        {/* rating and review section */}
+        <section className="">
+          <h1 className="font-semibold text-lg pb-4">
+            Recent Review & Ratings
+          </h1>
+
+          <div className="border p-5">
             <Grid container spacing={7}>
               <Grid item xs={7}>
                 <div className="space-y-5">
-                  {[1, 1, 1].map((item) => (
-                    <ProductReviewCard />
+                  {customersProduct.product?.reviews.map((item, i) => (
+                    <ProductReviewCard item={item} />
                   ))}
                 </div>
               </Grid>
+
               <Grid item xs={5}>
-                <h1 className="text-xl font-semibold pb-2">Product Ratings</h1>
-                <div className="flex items-cente space-x-3">
+                <h1 className="text-xl font-semibold pb-1">Product Ratings</h1>
+                <div className="flex items-center space-x-3 pb-10">
                   <Rating
                     name="read-only"
                     value={4.6}
                     precision={0.5}
                     readOnly
                   />
-                  <p className="opacity-60">5946890 Ratings</p>
+
+                  <p className="opacity-60">42807 Ratings</p>
                 </div>
-                <Box className="mt-5 space-y-3" sx={{ borderRadius: "16px" }}>
-                  <Grid container alignItems="center">
-                    <Grid item xs={2}>
-                      <p>Exellent</p>
+                <Box>
+                  <Grid
+                    container
+                    justifyContent="center"
+                    alignItems="center"
+                    gap={2}
+                  >
+                    <Grid xs={2}>
+                      <p className="p-0">Excellent</p>
                     </Grid>
-                    <Grid item xs={7}>
+                    <Grid xs={7}>
                       <LinearProgress
+                        className=""
                         sx={{ bgcolor: "#d0d0d0", borderRadius: 4, height: 7 }}
                         variant="determinate"
                         value={40}
-                        color="secondary"
-                      ></LinearProgress>
+                        color="success"
+                      />
+                    </Grid>
+                    <Grid xs={2}>
+                      <p className="opacity-50 p-2">19259</p>
                     </Grid>
                   </Grid>
-                  <Grid container alignItems="center">
-                    <Grid item xs={2}>
-                      <p>Very good</p>
+                </Box>
+                <Box>
+                  <Grid
+                    container
+                    justifyContent="center"
+                    alignItems="center"
+                    gap={2}
+                  >
+                    <Grid xs={2}>
+                      <p className="p-0">Very Good</p>
                     </Grid>
-                    <Grid item xs={7}>
+                    <Grid xs={7}>
                       <LinearProgress
+                        className=""
                         sx={{ bgcolor: "#d0d0d0", borderRadius: 4, height: 7 }}
                         variant="determinate"
                         value={30}
                         color="success"
-                      ></LinearProgress>
+                      />
+                    </Grid>
+                    <Grid xs={2}>
+                      <p className="opacity-50 p-2">19259</p>
                     </Grid>
                   </Grid>
-                  <Grid container alignItems="center">
-                    <Grid item xs={2}>
-                      <p>Good</p>
+                </Box>
+                <Box>
+                  <Grid
+                    container
+                    justifyContent="center"
+                    alignItems="center"
+                    gap={2}
+                  >
+                    <Grid xs={2}>
+                      <p className="p-0">Good</p>
                     </Grid>
-                    <Grid item xs={7}>
+                    <Grid xs={7}>
                       <LinearProgress
+                        className="bg-[#885c0a]"
                         sx={{ bgcolor: "#d0d0d0", borderRadius: 4, height: 7 }}
                         variant="determinate"
                         value={25}
-                        color="primary"
-                      ></LinearProgress>
+                        color="orange"
+                      />
+                    </Grid>
+                    <Grid xs={2}>
+                      <p className="opacity-50 p-2">19259</p>
                     </Grid>
                   </Grid>
-                  <Grid container alignItems="center">
-                    <Grid item xs={2}>
-                      <p>Average</p>
+                </Box>
+                <Box>
+                  <Grid
+                    container
+                    justifyContent="center"
+                    alignItems="center"
+                    gap={2}
+                  >
+                    <Grid xs={2}>
+                      <p className="p-0">Avarage</p>
                     </Grid>
-                    <Grid item xs={7}>
+                    <Grid xs={7}>
                       <LinearProgress
-                        sx={{ bgcolor: "#d0d0d0", borderRadius: 4, height: 7 }}
+                        className=""
+                        sx={{
+                          bgcolor: "#d0d0d0",
+                          borderRadius: 4,
+                          height: 7,
+                          "& .MuiLinearProgress-bar": {
+                            bgcolor: "#885c0a", // stroke color
+                          },
+                        }}
                         variant="determinate"
-                        value={20}
-                        color="warning"
-                      ></LinearProgress>
+                        value={21}
+                        color="success"
+                      />
+                    </Grid>
+                    <Grid xs={2}>
+                      <p className="opacity-50 p-2">19259</p>
                     </Grid>
                   </Grid>
-                  <Grid container alignItems="center">
-                    <Grid item xs={2}>
-                      <p>Poor</p>
+                </Box>
+                <Box>
+                  <Grid
+                    container
+                    justifyContent="center"
+                    alignItems="center"
+                    gap={2}
+                  >
+                    <Grid xs={2}>
+                      <p className="p-0">Poor</p>
                     </Grid>
-                    <Grid item xs={7}>
+                    <Grid xs={7}>
                       <LinearProgress
+                        className=""
                         sx={{ bgcolor: "#d0d0d0", borderRadius: 4, height: 7 }}
                         variant="determinate"
-                        value={15}
+                        value={10}
                         color="error"
-                      ></LinearProgress>
+                      />
+                    </Grid>
+                    <Grid xs={2}>
+                      <p className="opacity-50 p-2">19259</p>
                     </Grid>
                   </Grid>
                 </Box>
@@ -382,12 +489,13 @@ export default function ProductDetails() {
             </Grid>
           </div>
         </section>
-        {/* Similar Products */}
-        <section className="mt-5">
-          <h1 className="py-5 text-xl font-bold">Similar Products</h1>
-          <div className="flex flex-wrap gap-5 justify-between">
-            {mens_catalogy.map((item) => (
-              <HomeSectionCard key={item.id} product={item} />
+
+        {/* similer product */}
+        <section className=" pt-10">
+          <h1 className="py-5 text-xl font-bold">Similer Products</h1>
+          <div className="flex flex-wrap space-y-5">
+            {gounsPage1.map((item) => (
+              <HomeSectionCard product={item} />
             ))}
           </div>
         </section>

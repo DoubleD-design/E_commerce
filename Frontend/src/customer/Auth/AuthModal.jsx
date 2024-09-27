@@ -1,9 +1,9 @@
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Modal from "@mui/material/Modal";
-import RegisterUserForm from "./Register";
+import RegisterUserForm from "./RegisterForm";
 import { useEffect, useState } from "react";
-import LoginUserForm from "./Login";
+import LoginUserForm from "./LoginForm";
 import { useLocation } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Alert, Snackbar } from "@mui/material";

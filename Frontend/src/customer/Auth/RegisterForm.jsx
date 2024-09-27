@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getUser, register } from "../../../Redux/Auth/Action";
+import { getUser, register } from "../../Redux/Auth/Action";
 import { Fragment, useEffect, useState } from "react";
 
 export default function RegisterUserForm({ handleNext }) {

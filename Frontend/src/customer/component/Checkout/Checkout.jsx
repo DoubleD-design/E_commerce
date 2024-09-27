@@ -5,7 +5,7 @@ import Step from "@mui/material/Step";
 import StepLabel from "@mui/material/StepLabel";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
-import AddDeliveryAddressForm from "./AddAddress";
+import DeliveryAddressForm from "./DeliveryAddressForm";
 import { useLocation, useNavigate } from "react-router-dom";
 import OrderSummary from "./OrderSummary";
 
@@ -81,7 +81,7 @@ export default function Checkout() {
 
           <div className="my-5">
             {step == 2 ? (
-              <AddDeliveryAddressForm handleNext={handleNext} />
+              <DeliveryAddressForm handleNext={handleNext} />
             ) : (
               <OrderSummary />
             )}

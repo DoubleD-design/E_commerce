@@ -2,7 +2,7 @@ import * as React from "react";
 import { Grid, TextField, Button, Box, Snackbar, Alert } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getUser, login } from "../../../Redux/Auth/Action";
+import { getUser, login } from "../../Redux/Auth/Action";
 import { useEffect } from "react";
 import { useState } from "react";
 

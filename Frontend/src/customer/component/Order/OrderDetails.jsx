@@ -3,7 +3,7 @@ import React from "react";
 import OrderTraker from "./OrderTraker";
 import StarIcon from "@mui/icons-material/Star";
 import { useNavigate, useParams } from "react-router-dom";
-import AddressCard from "../adreess/AdreessCard";
+import AddressCard from "../AddressCard/AddressCard";
 import { deepPurple } from "@mui/material/colors";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";

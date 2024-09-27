@@ -9,8 +9,8 @@ import {
 
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { Avatar, Button, Menu, MenuItem } from "@mui/material";
-import { navigation } from "../../../config/navigationMenu";
-import AuthModal from "../Auth/AuthModal";
+import { navigation } from "../../../config/navigationData";
+import AuthModal from "../../Auth/AuthModal";
 import { useDispatch, useSelector } from "react-redux";
 import { deepPurple } from "@mui/material/colors";
 import { getUser, logout } from "../../../Redux/Auth/Action";

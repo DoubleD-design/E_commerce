@@ -1,5 +1,5 @@
 import AliceCarousel from "react-alice-carousel";
-import HomeProductCard from "./HomeProductCard";
+import HomeSectionCard from "../HomeSectionCard/HomeSectionCard";
 import { Button } from "@mui/material";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { useState } from "react";
@@ -28,7 +28,7 @@ const HomeSectionCarousel = ({ section, data }) => {
   const items = data?.slice(0, 10).map((item) => (
     <div className="">
       {" "}
-      <HomeProductCard product={item} />
+      <HomeSectionCard product={item} />
     </div>
   ));
 

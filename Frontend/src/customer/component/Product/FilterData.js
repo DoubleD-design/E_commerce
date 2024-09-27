@@ -8,7 +8,7 @@ export const color = [
   "Green",
   "Yellow",
 ];
-export const Filters = [
+export const filters = [
   {
     id: "color",
     name: "Color",

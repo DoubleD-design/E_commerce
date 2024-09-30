@@ -1,10 +1,15 @@
 package com.example.repository;
 
-import com.example.model.User;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-@Repository
+import com.example.modal.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
 public interface UserRepository extends JpaRepository<User, Long> {
-    public User findByEmail(String email);
+
+    User findByEmail(String email);
+
+    List<User> findAllByOrderByCreatedAtDesc();
+
 }

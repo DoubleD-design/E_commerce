@@ -1,23 +1,32 @@
 package com.example.service;
 
-import com.example.Exception.OrderException;
-import com.example.model.Address;
-import com.example.model.Order;
-import com.example.model.User;
+import com.example.exception.OrderException;
+import com.example.modal.Address;
+import com.example.modal.Order;
+import com.example.modal.User;
 
 import java.util.List;
 
 public interface OrderService {
-    public Order createOrder(User user, Address shippingAddress);
-    public Order findOrderById(Long orderId) throws OrderException;
-    public List<Order> usersOrderHistory(Long userId) throws OrderException;
-    public Order placedOrder(Long orderId) throws OrderException;
-    public Order confirmedOrder(Long orderId) throws OrderException;
-    public Order shippedOrder(Long orderId) throws OrderException;
-    public Order deliveredOrder(Long orderId) throws OrderException;
-    public Order canceledOrder(Long orderId) throws OrderException;
-    public List<Order> getAllOrders();
-    public void deleteOrder(Long orderId) throws OrderException;
 
-    public Order cancledOrder(Long orderId) throws OrderException;
+    Order createOrder(User user, Address shippingAdress);
+
+    Order findOrderById(Long orderId) throws OrderException;
+
+    List<Order> usersOrderHistory(Long userId);
+
+    Order placedOrder(Long orderId) throws OrderException;
+
+    Order confirmedOrder(Long orderId) throws OrderException;
+
+    Order shippedOrder(Long orderId) throws OrderException;
+
+    Order deliveredOrder(Long orderId) throws OrderException;
+
+    Order cancledOrder(Long orderId) throws OrderException;
+
+    List<Order> getAllOrders();
+
+    void deleteOrder(Long orderId) throws OrderException;
+
 }

@@ -1,7 +1,9 @@
-package com.example.Exception;
+package com.example.exception;
 
 public class OrderException extends Exception {
-    public OrderException(String message){
+
+    public OrderException(String message) {
         super(message);
     }
+
 }

@@ -1,10 +1,16 @@
 package com.example.service;
 
-import com.example.Exception.UserException;
-import com.example.model.User;
+import com.example.exception.UserException;
+import com.example.modal.User;
+
+import java.util.List;
 
 public interface UserService {
-    public User findUserById(Long userId) throws UserException;
 
-    public User findUserProfilebyJwt(String jwt) throws UserException;
+    User findUserById(Long userId) throws UserException;
+
+    User findUserProfileByJwt(String jwt) throws UserException;
+
+    List<User> findAllUsers();
+
 }

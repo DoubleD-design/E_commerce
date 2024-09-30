@@ -1,7 +1,8 @@
 package com.example.request;
 
 public class RatingRequest {
-    private  Long productId;
+
+    private Long productId;
     private double rating;
 
     public Long getProductId() {
@@ -19,4 +20,6 @@ public class RatingRequest {
     public void setRating(double rating) {
         this.rating = rating;
     }
+
+
 }

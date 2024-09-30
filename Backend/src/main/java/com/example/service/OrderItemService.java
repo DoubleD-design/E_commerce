@@ -1,7 +1,9 @@
 package com.example.service;
 
-import com.example.model.OrderItem;
+import com.example.modal.OrderItem;
 
 public interface OrderItemService {
-    public OrderItem createOrderItem(OrderItem orderItem);
+
+    OrderItem createOrderItem(OrderItem orderItem);
+
 }

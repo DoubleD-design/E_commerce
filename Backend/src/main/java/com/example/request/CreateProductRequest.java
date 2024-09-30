@@ -1,24 +1,44 @@
 package com.example.request;
 
-import com.example.model.Size;
+import com.example.modal.Size;
 
 import java.util.HashSet;
 import java.util.Set;
 
+
 public class CreateProductRequest {
+
     private String title;
+
     private String description;
+
     private int price;
+
     private int discountedPrice;
-    private int discountPercent;
+
+    private int discountPersent;
+
     private int quantity;
-    private  String brand;
+
+    private String brand;
+
     private String color;
+
     private Set<Size> size = new HashSet<>();
+
     private String imageUrl;
-    private String topLevelCategory;
-    private String secondLevelCategory;
-    private String thirdLevelCategory;
+
+    private String topLavelCategory;
+    private String secondLavelCategory;
+    private String thirdLavelCategory;
+
+    public Set<Size> getSize() {
+        return size;
+    }
+
+    public void setSize(Set<Size> size) {
+        this.size = size;
+    }
 
     public String getTitle() {
         return title;
@@ -52,12 +72,12 @@ public class CreateProductRequest {
         this.discountedPrice = discountedPrice;
     }
 
-    public int getDiscountPercent() {
-        return discountPercent;
+    public int getDiscountPersent() {
+        return discountPersent;
     }
 
-    public void setDiscountPercent(int discountPercent) {
-        this.discountPercent = discountPercent;
+    public void setDiscountPersent(int discountPersent) {
+        this.discountPersent = discountPersent;
     }
 
     public int getQuantity() {
@@ -84,14 +104,6 @@ public class CreateProductRequest {
         this.color = color;
     }
 
-    public Set<Size> getSize() {
-        return size;
-    }
-
-    public void setSize(Set<Size> size) {
-        this.size = size;
-    }
-
     public String getImageUrl() {
         return imageUrl;
     }
@@ -100,30 +112,29 @@ public class CreateProductRequest {
         this.imageUrl = imageUrl;
     }
 
-    public String getTopLevelCategory() {
-        return topLevelCategory;
+    public String getTopLavelCategory() {
+        return topLavelCategory;
     }
 
-    public void setTopLevelCategory(String topLevelCategory) {
-        this.topLevelCategory = topLevelCategory;
+    public void setTopLavelCategory(String topLavelCategory) {
+        this.topLavelCategory = topLavelCategory;
     }
 
-    public String getSecondLevelCategory() {
-        return secondLevelCategory;
+    public String getSecondLavelCategory() {
+        return secondLavelCategory;
     }
 
-    public void setSecondLevelCategory(String secondLevelCategory) {
-        this.secondLevelCategory = secondLevelCategory;
+    public void setSecondLavelCategory(String secondLavelCategory) {
+        this.secondLavelCategory = secondLavelCategory;
     }
 
-    public String getThirdLevelCategory() {
-        return thirdLevelCategory;
+    public String getThirdLavelCategory() {
+        return thirdLavelCategory;
     }
 
-    public void setThirdLevelCategory(String thirdLevelCategory) {
-        this.thirdLevelCategory = thirdLevelCategory;
+    public void setThirdLavelCategory(String thirdLavelCategory) {
+        this.thirdLavelCategory = thirdLavelCategory;
     }
 
-    public CreateProductRequest() {
-    }
+
 }

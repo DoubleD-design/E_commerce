@@ -1,6 +1,7 @@
 package com.example.request;
 
 public class ReviewRequest {
+
     private Long productId;
     private String review;
 
@@ -19,4 +20,6 @@ public class ReviewRequest {
     public void setReview(String review) {
         this.review = review;
     }
+
+
 }

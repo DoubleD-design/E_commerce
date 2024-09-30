@@ -1,34 +1,50 @@
 package com.example.controller;
 
-import com.example.Exception.CartItemException;
-import com.example.Exception.UserException;
-import com.example.model.User;
+import com.example.exception.CartItemException;
+import com.example.exception.UserException;
+import com.example.modal.CartItem;
+import com.example.modal.User;
+import com.example.response.ApiResponse;
 import com.example.service.CartItemService;
 import com.example.service.UserService;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import org.springframework.beans.factory.annotation.Autowired;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/cartitem")
+@RequestMapping("/api/cart_items")
+@Tag(name = "Cart Item Management", description = "create cart item delete cart item")
 public class CartItemController {
-    @Autowired
-    private CartItemService cartItemService;
-    @Autowired
-    private UserService userService;
 
-    @DeleteMapping("/{cartItemId}")
-    @Operation(description = "Remove cart item from cart")
-    @ApiResponse(description = "Delete cart item")
-    public ResponseEntity<com.example.response.ApiResponse> deleteCartItem(@PathVariable Long cartItemId, @RequestHeader("Authorization") String jwt) throws UserException, CartItemException{
-        User user = userService.findUserProfilebyJwt(jwt);
-        cartItemService.removeCartItem(user.getId(), cartItemId);
-        com.example.response.ApiResponse res = new com.example.response.ApiResponse();
-        res.setMessage("Cart item removed successfully");
-        res.setStatus(true);
-        return new ResponseEntity<>(res, org.springframework.http.HttpStatus.OK);
+    private final CartItemService cartItemService;
+    private final UserService userService;
+
+    public CartItemController(CartItemService cartItemService, UserService userService) {
+        this.cartItemService = cartItemService;
+        this.userService = userService;
     }
 
+    @DeleteMapping("/{cartItemId}")
+    public ResponseEntity<ApiResponse> deleteCartItemHandler(@PathVariable Long cartItemId, @RequestHeader("Authorization") String jwt) throws CartItemException, UserException {
+
+        User user = userService.findUserProfileByJwt(jwt);
+        cartItemService.removeCartItem(user.getId(), cartItemId);
+
+        ApiResponse res = new ApiResponse("Item Remove From Cart", true);
+
+        return new ResponseEntity<ApiResponse>(res, HttpStatus.ACCEPTED);
+    }
+
+    @PutMapping("/{cartItemId}")
+    public ResponseEntity<CartItem> updateCartItemHandler(@PathVariable Long cartItemId, @RequestBody CartItem cartItem, @RequestHeader("Authorization") String jwt) throws CartItemException, UserException {
+
+        User user = userService.findUserProfileByJwt(jwt);
+
+        CartItem updatedCartItem = cartItemService.updateCartItem(user.getId(), cartItemId, cartItem);
+
+        //ApiResponse res=new ApiResponse("Item Updated",true);
+
+        return new ResponseEntity<>(updatedCartItem, HttpStatus.ACCEPTED);
+    }
 }

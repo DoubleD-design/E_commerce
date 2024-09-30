@@ -1,27 +1,21 @@
 package com.example.request;
 
 public class AddItemRequest {
-    private long productId;
+
+    private Long productId;
     private String size;
     private int quantity;
     private Integer price;
 
     public AddItemRequest() {
+
     }
 
-    public AddItemRequest(long productId, String size, int quantity, Integer price) {
-        super();
-        this.productId = productId;
-        this.size = size;
-        this.quantity = quantity;
-        this.price = price;
-    }
-
-    public long getProductId() {
+    public Long getProductId() {
         return productId;
     }
 
-    public void setProductId(long productId) {
+    public void setProductId(Long productId) {
         this.productId = productId;
     }
 
@@ -48,4 +42,6 @@ public class AddItemRequest {
     public void setPrice(Integer price) {
         this.price = price;
     }
+
+
 }

@@ -4,8 +4,8 @@ export const sareePage1=[
         "title": "PRATHAM BLUE",
         "title2": "Embroidered Bollywood Georgette Saree",
         "color": "Purple",
-        "selling_price": "₹789",
-        "price": "₹3,999",
+        "selling_price": "$789",
+        "price": "$3,999",
         "disscount": "80% off"
     },
     {
@@ -13,8 +13,8 @@ export const sareePage1=[
         "title": "Banaras silk palace",
         "title2": "Woven Banarasi Tissue Saree",
         "color": "Pink",
-        "selling_price": "₹996",
-        "price": "₹3,500",
+        "selling_price": "$996",
+        "price": "$3,500",
         "disscount": "71% off"
     },
     {
@@ -22,8 +22,8 @@ export const sareePage1=[
         "title": "Qwarty",
         "title2": "Polka Print, Embroidered, Self Design Bandhani\n                          Georgett...",
         "color": "Red",
-        "selling_price": "₹374",
-        "price": "₹1,798",
+        "selling_price": "$374",
+        "price": "$1,798",
         "disscount": "79% off"
     },
     {
@@ -31,8 +31,8 @@ export const sareePage1=[
         "title": "Rarebeauty",
         "title2": "Embroidered Bollywood Georgette Saree",
         "color": "Black",
-        "selling_price": "₹329",
-        "price": "₹2,299",
+        "selling_price": "$329",
+        "price": "$2,299",
         "disscount": "85% off"
     },
     {
@@ -40,8 +40,8 @@ export const sareePage1=[
         "title": "Tejassarees",
         "title2": "Embellished Bandhani Georgette Saree",
         "color": "Yellow",
-        "selling_price": "₹390",
-        "price": "₹942",
+        "selling_price": "$390",
+        "price": "$942",
         "disscount": "58% off"
     },
     {
@@ -49,8 +49,8 @@ export const sareePage1=[
         "title": "Kalapushpi",
         "title2": "Self Design Banarasi Cotton Blend, Pure Silk Saree",
         "color": "Maroon",
-        "selling_price": "₹497",
-        "price": "₹2,899",
+        "selling_price": "$497",
+        "price": "$2,899",
         "disscount": "82% off"
     },
     {
@@ -58,8 +58,8 @@ export const sareePage1=[
         "title": "Krishna R fashion",
         "title2": "Woven Bollywood Georgette, Cotton Silk Saree",
         "color": "Pink, Beige",
-        "selling_price": "₹479",
-        "price": "₹3,999",
+        "selling_price": "$479",
+        "price": "$3,999",
         "disscount": "88% off"
     },
     {
@@ -67,8 +67,8 @@ export const sareePage1=[
         "title": "Shaibo saree",
         "title2": "Checkered Bollywood Cotton Silk Saree",
         "color": "Pack of 2, Multicolor",
-        "selling_price": "₹634",
-        "price": "₹2,199",
+        "selling_price": "$634",
+        "price": "$2,199",
         "disscount": "71% off"
     },
     {
@@ -76,8 +76,8 @@ export const sareePage1=[
         "title": "Rarebeauty",
         "title2": "Embroidered Bollywood Georgette Saree",
         "color": "Blue",
-        "selling_price": "₹295",
-        "price": "₹2,007",
+        "selling_price": "$295",
+        "price": "$2,007",
         "disscount": "85% off"
     },
     {
@@ -85,8 +85,8 @@ export const sareePage1=[
         "title": "MATRUCHHAYA",
         "title2": "Embroidered, Woven Daily Wear Georgette Saree",
         "color": "Grey",
-        "selling_price": "₹296",
-        "price": "₹1,999",
+        "selling_price": "$296",
+        "price": "$1,999",
         "disscount": "85% off"
     },
     {
@@ -94,8 +94,8 @@ export const sareePage1=[
         "title": "Adirotz",
         "title2": "Embroidered Bollywood Georgette Saree",
         "color": "Magenta",
-        "selling_price": "₹479",
-        "price": "₹2,599",
+        "selling_price": "$479",
+        "price": "$2,599",
         "disscount": "81% off"
     },
     {
@@ -103,8 +103,8 @@ export const sareePage1=[
         "title": "Pisara",
         "title2": "Woven Bollywood Organza Saree",
         "color": "Multicolor",
-        "selling_price": "₹1,329",
-        "price": "₹4,997",
+        "selling_price": "$1,329",
+        "price": "$4,997",
         "disscount": "73% off"
     },
     {
@@ -112,8 +112,8 @@ export const sareePage1=[
         "title": "Ejoty Fashion",
         "title2": "Floral Print Bollywood Lycra Blend Saree",
         "color": "Black",
-        "selling_price": "₹289",
-        "price": "₹2,999",
+        "selling_price": "$289",
+        "price": "$2,999",
         "disscount": "90% off"
     },
     {
@@ -121,8 +121,8 @@ export const sareePage1=[
         "title": "ShiVAdit Ethnic",
         "title2": "Embroidered, Self Design, Applique Banarasi Art Silk,\n                          N...",
         "color": "Black",
-        "selling_price": "₹649",
-        "price": "₹2,499",
+        "selling_price": "$649",
+        "price": "$2,499",
         "disscount": "74% off"
     },
     {
@@ -130,8 +130,8 @@ export const sareePage1=[
         "title": "Kartvya",
         "title2": "Woven Kanjivaram Jacquard, Pure Silk Saree",
         "color": "Pink",
-        "selling_price": "₹373",
-        "price": "₹1,699",
+        "selling_price": "$373",
+        "price": "$1,699",
         "disscount": "78% off"
     },
     {
@@ -139,8 +139,8 @@ export const sareePage1=[
         "title": "Samah",
         "title2": "Printed, Geometric Print, Embellished Daily Wear\n                          Lycra ...",
         "color": "Black",
-        "selling_price": "₹273",
-        "price": "₹1,233",
+        "selling_price": "$273",
+        "price": "$1,233",
         "disscount": "77% off"
     },
     {
@@ -148,8 +148,8 @@ export const sareePage1=[
         "title": "RadadiyaTRD",
         "title2": "Self Design Bollywood Georgette, Cotton Silk Saree",
         "color": "Black",
-        "selling_price": "₹699",
-        "price": "₹2,999",
+        "selling_price": "$699",
+        "price": "$2,999",
         "disscount": "76% off"
     },
     {
@@ -157,8 +157,8 @@ export const sareePage1=[
         "title": "NAMRA TEX",
         "title2": "Embellished Daily Wear Georgette Saree",
         "color": "Black",
-        "selling_price": "₹1,299",
-        "price": "₹1,999",
+        "selling_price": "$1,299",
+        "price": "$1,999",
         "disscount": "35% off"
     },
     {
@@ -166,8 +166,8 @@ export const sareePage1=[
         "title": "SNH EXPORT",
         "title2": "Woven Banarasi Silk Blend Saree",
         "color": "Red",
-        "selling_price": "₹499",
-        "price": "₹2,999",
+        "selling_price": "$499",
+        "price": "$2,999",
         "disscount": "83% off"
     },
     {
@@ -175,8 +175,8 @@ export const sareePage1=[
         "title": "Disha Fashion",
         "title2": "Embroidered Banarasi Art Silk Saree",
         "color": "Yellow",
-        "selling_price": "₹478",
-        "price": "₹999",
+        "selling_price": "$478",
+        "price": "$999",
         "disscount": "52% off"
     },
     {
@@ -184,8 +184,8 @@ export const sareePage1=[
         "title": "Kayimi",
         "title2": "Printed Bollywood Art Silk Saree",
         "color": "Pink, Beige",
-        "selling_price": "₹349",
-        "price": "₹1,663",
+        "selling_price": "$349",
+        "price": "$1,663",
         "disscount": "79% off"
     },
     {
@@ -193,8 +193,8 @@ export const sareePage1=[
         "title": "JSItaliya",
         "title2": "Self Design, Embroidered Bollywood Net Saree",
         "color": "White",
-        "selling_price": "₹449",
-        "price": "₹1,999",
+        "selling_price": "$449",
+        "price": "$1,999",
         "disscount": "77% off"
     },
     {
@@ -202,8 +202,8 @@ export const sareePage1=[
         "title": "Disha Fashion",
         "title2": "Embroidered Banarasi Art Silk Saree",
         "color": "Maroon",
-        "selling_price": "₹492",
-        "price": "₹999",
+        "selling_price": "$492",
+        "price": "$999",
         "disscount": "50% off"
     },
     {
@@ -211,8 +211,8 @@ export const sareePage1=[
         "title": "Aishwarya",
         "title2": "Printed, Floral Print Daily Wear Chiffon Saree",
         "color": "Yellow",
-        "selling_price": "₹449",
-        "price": "₹1,999",
+        "selling_price": "$449",
+        "price": "$1,999",
         "disscount": "77% off"
     },
     {
@@ -220,8 +220,8 @@ export const sareePage1=[
         "title": "Krishna R fashion",
         "title2": "Woven Bollywood Jacquard Saree",
         "color": "Pink, Grey",
-        "selling_price": "₹469",
-        "price": "₹3,999",
+        "selling_price": "$469",
+        "price": "$3,999",
         "disscount": "88% off"
     },
     {
@@ -229,8 +229,8 @@ export const sareePage1=[
         "title": "Rarebeauty",
         "title2": "Embroidered Bollywood Georgette Saree",
         "color": "Dark Blue",
-        "selling_price": "₹349",
-        "price": "₹1,999",
+        "selling_price": "$349",
+        "price": "$1,999",
         "disscount": "82% off"
     },
     {
@@ -238,8 +238,8 @@ export const sareePage1=[
         "title": "LASFIRA",
         "title2": "Self Design Banarasi Cotton Blend, Jacquard Saree",
         "color": "Cream",
-        "selling_price": "₹489",
-        "price": "₹2,499",
+        "selling_price": "$489",
+        "price": "$2,499",
         "disscount": "80% off"
     },
     {
@@ -247,8 +247,8 @@ export const sareePage1=[
         "title": "Adirotz",
         "title2": "Embroidered Bollywood Georgette Saree",
         "color": "Blue",
-        "selling_price": "₹479",
-        "price": "₹2,599",
+        "selling_price": "$479",
+        "price": "$2,599",
         "disscount": "81% off"
     },
     {
@@ -256,8 +256,8 @@ export const sareePage1=[
         "title": "LOROFY",
         "title2": "Self Design Bollywood Net Saree",
         "color": "Red",
-        "selling_price": "₹294",
-        "price": "₹1,599",
+        "selling_price": "$294",
+        "price": "$1,599",
         "disscount": "81% off"
     },
     {
@@ -265,8 +265,8 @@ export const sareePage1=[
         "title": "Samah",
         "title2": "Printed, Geometric Print, Embellished Bhagalpuri Silk\n                          B...",
         "color": "Green, Pink",
-        "selling_price": "₹289",
-        "price": "₹1,563",
+        "selling_price": "$289",
+        "price": "$1,563",
         "disscount": "81% off"
     },
     {
@@ -274,8 +274,8 @@ export const sareePage1=[
         "title": "LASFIRA",
         "title2": "Self Design Banarasi Cotton Blend, Jacquard Saree",
         "color": "Light Green",
-        "selling_price": "₹471",
-        "price": "₹2,499",
+        "selling_price": "$471",
+        "price": "$2,499",
         "disscount": "81% off"
     },
     {
@@ -283,8 +283,8 @@ export const sareePage1=[
         "title": "signagraph",
         "title2": "Woven Banarasi Pure Silk, Satin Saree",
         "color": "Maroon",
-        "selling_price": "₹379",
-        "price": "₹3,999",
+        "selling_price": "$379",
+        "price": "$3,999",
         "disscount": "90% off"
     },
     {
@@ -292,8 +292,8 @@ export const sareePage1=[
         "title": "Cartyshop",
         "title2": "Embellished Bollywood Georgette, Art Silk Saree",
         "color": "Light Blue, Blue",
-        "selling_price": "₹387",
-        "price": "₹3,999",
+        "selling_price": "$387",
+        "price": "$3,999",
         "disscount": "90% off"
     },
     {
@@ -301,8 +301,8 @@ export const sareePage1=[
         "title": "Jiyan Fashion Retail",
         "title2": "Floral Print Bollywood Lycra Blend Saree",
         "color": "Maroon, Black",
-        "selling_price": "₹249",
-        "price": "₹2,497",
+        "selling_price": "$249",
+        "price": "$2,497",
         "disscount": "90% off"
     },
     {
@@ -310,8 +310,8 @@ export const sareePage1=[
         "title": "MATRUCHHAYA",
         "title2": "Embroidered, Woven Daily Wear Georgette Saree",
         "color": "Yellow",
-        "selling_price": "₹296",
-        "price": "₹1,999",
+        "selling_price": "$296",
+        "price": "$1,999",
         "disscount": "85% off"
     },
     {
@@ -319,8 +319,8 @@ export const sareePage1=[
         "title": "samruddhi",
         "title2": "Woven Kanjivaram Pure Silk Saree",
         "color": "Red",
-        "selling_price": "₹441",
-        "price": "₹5,999",
+        "selling_price": "$441",
+        "price": "$5,999",
         "disscount": "92% off"
     },
     {
@@ -328,8 +328,8 @@ export const sareePage1=[
         "title": "Kayimi",
         "title2": "Printed Bollywood Art Silk Saree",
         "color": "Red, Beige",
-        "selling_price": "₹349",
-        "price": "₹1,663",
+        "selling_price": "$349",
+        "price": "$1,663",
         "disscount": "79% off"
     },
     {
@@ -337,8 +337,8 @@ export const sareePage1=[
         "title": "LASFIRA",
         "title2": "Self Design Banarasi Jacquard Saree",
         "color": "Pink",
-        "selling_price": "₹499",
-        "price": "₹2,999",
+        "selling_price": "$499",
+        "price": "$2,999",
         "disscount": "83% off"
     },
     {
@@ -346,8 +346,8 @@ export const sareePage1=[
         "title": "Anand Sarees",
         "title2": "Printed, Striped Daily Wear Georgette Saree",
         "color": "White, Black",
-        "selling_price": "₹299",
-        "price": "₹1,299",
+        "selling_price": "$299",
+        "price": "$1,299",
         "disscount": "76% off"
     },
     {
@@ -355,8 +355,8 @@ export const sareePage1=[
         "title": "Anand Sarees",
         "title2": "Printed, Floral Print Daily Wear Georgette Saree",
         "color": "Red",
-        "selling_price": "₹299",
-        "price": "₹1,299",
+        "selling_price": "$299",
+        "price": "$1,299",
         "disscount": "76% off"
     }
 ]

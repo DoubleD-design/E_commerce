@@ -20,44 +20,46 @@ import {
   SEARCH_PRODUCT_SUCCESS,
   SEARCH_PRODUCT_FAILURE,
 } from "./ActionType";
-import api, { API_BASE_URL } from "../../../config/apiConfig";
+import api, { API_BASE_URL } from "../../../config/api";
 
-export const findProducts = (reqData) => async (dispatch) => {
-  const {
-    colors,
-    sizes,
-    minPrice,
-    maxPrice,
-    minDiscount,
-    category,
-    stock,
-    sort,
-    pageNumber,
-    pageSize,
-  } = reqData;
+export const findProducts =
+  (reqData = {}) =>
+  async (dispatch) => {
+    const {
+      colors,
+      sizes,
+      minPrice,
+      maxPrice,
+      minDiscount,
+      category,
+      stock,
+      sort,
+      pageNumber,
+      pageSize,
+    } = reqData;
 
-  try {
-    dispatch({ type: FIND_PRODUCTS_BY_CATEGORY_REQUEST });
+    try {
+      dispatch({ type: FIND_PRODUCTS_BY_CATEGORY_REQUEST });
 
-    const { data } = await api.get(
-      `/api/products?color=${colors}&size=${sizes}&minPrice=${minPrice}&maxPrice=${maxPrice}&minDiscount=${minDiscount}&category=${category}&stock=${stock}&sort=${sort}&pageNumber=${pageNumber}&pageSize=${pageSize}`
-    );
+      const { data } = await api.get(
+        `/api/products?color=${colors}&size=${sizes}&minPrice=${minPrice}&maxPrice=${maxPrice}&minDiscount=${minDiscount}&category=${category}&stock=${stock}&sort=${sort}&pageNumber=${pageNumber}&pageSize=${pageSize}`
+      );
 
-    console.log("get product by category - ", data);
-    dispatch({
-      type: FIND_PRODUCTS_BY_CATEGORY_SUCCESS,
-      payload: data,
-    });
-  } catch (error) {
-    dispatch({
-      type: FIND_PRODUCTS_BY_CATEGORY_FAILURE,
-      payload:
-        error.response && error.response.data.message
-          ? error.response.data.message
-          : error.message,
-    });
-  }
-};
+      console.log("get product by category - ", data);
+      dispatch({
+        type: FIND_PRODUCTS_BY_CATEGORY_SUCCESS,
+        payload: data,
+      });
+    } catch (error) {
+      dispatch({
+        type: FIND_PRODUCTS_BY_CATEGORY_FAILURE,
+        payload:
+          error.response && error.response.data.message
+            ? error.response.data.message
+            : error.message,
+      });
+    }
+  };
 
 export const findProductById = (reqData) => async (dispatch) => {
   try {

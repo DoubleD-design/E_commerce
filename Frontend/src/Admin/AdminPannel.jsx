@@ -14,18 +14,18 @@ import { useTheme } from "@mui/material/styles";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import { customTheme } from "./them/customeThem";
+import { customeTheme } from "./theme/customeTheme";
 import AdminNavbar from "./Navigation/AdminNavbar";
 import Dashboard from "./Views/Admin";
 import { Route, Routes, useNavigate } from "react-router-dom";
 import DemoAdmin from "./Views/DemoAdmin";
-import CreateProductForm from "./components/createProduct/CreateProductFrom";
+import CreateProductForm from "./componets/createProduct/CreateProductFrom";
 
 import "./AdminPannel.css";
-import ProductsTable from "./components/Products/ProductsTable";
-import OrdersTable from "./components/Orders/OrdersTable";
-import Customers from "./components/customers/customers";
-import UpdateProductForm from "./components/updateProduct/UpdateProduct";
+import ProductsTable from "./componets/Products/ProductsTable";
+import OrdersTable from "./componets/Orders/OrdersTable";
+import Customers from "./componets/customers/customers";
+import UpdateProductForm from "./componets/updateProduct/UpdateProduct";
 
 const drawerWidth = 240;
 
@@ -96,7 +96,7 @@ export default function AdminPannel() {
   const drawerVariant = isLargeScreen ? "permanent" : "temporary";
 
   return (
-    <ThemeProvider theme={customTheme}>
+    <ThemeProvider theme={customeTheme}>
       <Box sx={{ display: `${isLargeScreen ? "flex" : "block"}` }}>
         <CssBaseline />
         <AdminNavbar handleSideBarViewInMobile={handleSideBarViewInMobile} />

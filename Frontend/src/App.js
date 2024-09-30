@@ -1,22 +1,29 @@
-import logo from "./logo.svg";
-import "./App.css";
-import Navigation from "./customer/component/Navigation/Navigation";
-import HomePage from "./pages/HomePage";
-import Footer from "./customer/component/Footer/Footer";
-import Product from "./customer/component/Product/Product";
-import ProductDetails from "./customer/component/ProductDetails/ProductDetails";
-import Cart from "./customer/component/Cart/Cart";
-import Checkout from "./customer/component/Checkout/Checkout";
-import Order from "./customer/component/Order/Order";
-import OrderDetails from "./customer/component/Order/OrderDetails";
 import { Route, Routes } from "react-router-dom";
-import CustomerRouters from "./Routers/CustomerRouters";
+import "./App.css";
+import Navigation from "./customer/Components/Navbar/Navigation";
+import CustomerRoutes from "./Routers/CustomerRoutes";
+import AdminRoutes from "./Routers/AdminRoutes";
+import NotFound from "./Pages/Notfound";
+import AdminPannel from "./Admin/AdminPannel";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { getUser } from "./Redux/Auth/Action";
+// import Routers from './Routers/Routers';
 
 function App() {
+  const {auth}=useSelector(store=>store);
+  const dispatch = useDispatch();
+  const jwt = localStorage.getItem("jwt");
+  useEffect(() => {
+    if (jwt) {
+      dispatch(getUser(jwt));
+    }
+  }, [jwt]);
   return (
     <div className="">
       <Routes>
-        <Route path="/*" element={<CustomerRouters />}></Route>
+        <Route path="/*" element={<CustomerRoutes />} />
+       {auth.user?.role==="ROLE_ADMIN" && <Route path="/admin/*" element={<AdminPannel />} />}
       </Routes>
     </div>
   );

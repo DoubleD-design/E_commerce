@@ -10,7 +10,7 @@ import {
   GET_USER_FAILURE,
   LOGOUT,
   GET_ALL_CUSTOMERS_SUCCESS,
-} from "./ActionType";
+} from "./ActionTypes";
 
 const initialState = {
   user: null,
@@ -41,12 +41,12 @@ const authReducer = (state = initialState, action) => {
         user: action.payload,
         fetchingUser: false,
       };
-    case GET_ALL_CUSTOMERS_SUCCESS:
-      return {
-        ...state,
-        isLoading: false,
-        customers: action.payload,
-      };
+      case GET_ALL_CUSTOMERS_SUCCESS:
+        return {
+          ...state,
+          isLoading: false,
+          customers: action.payload,
+        };
     case GET_USER_FAILURE:
       return {
         ...state,

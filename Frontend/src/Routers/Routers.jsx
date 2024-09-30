@@ -1,18 +1,18 @@
 // import { Navigation } from "mdi-material-ui";
 import React from "react";
 import { Routes, Route } from "react-router-dom";
-import HomePage from "../pages/HomePage";
-import About from "../pages/About";
-import PrivacyPolicy from "../pages/PrivacyPolicy";
-import TearmsCondition from "../pages/TearmsCondition";
-import Contact from "../pages/Contact";
-import Product from "../customer/components/Product/Product";
-import ProductDetails from "../customer/components/ProductDetails/ProductDetails";
-import Cart from "../customer/components/Cart/Cart";
+import Homepage from "../Pages/Homepage";
+import About from "../Pages/About";
+import PrivacyPolicy from "../Pages/PrivacyPolicy";
+import TearmsCondition from "../Pages/TearmsCondition";
+import Contact from "../Pages/Contact";
+import Product from "../customer/Components/Product/Product/Product";
+import ProductDetails from "../customer/Components/Product/ProductDetails/ProductDetails";
+import Cart from "../customer/Components/Product/Cart/Cart";
 
 import DemoAdmin from "../Admin/Views/DemoAdmin";
 import AdminPannel from "../Admin/AdminPannel";
-import Navigation from "../customer/components/Navigation/Navigation";
+import Navigation from "../customer/Components/Navbar/Navigation";
 
 const Routers = () => {
   return (
@@ -23,8 +23,8 @@ const Routers = () => {
        <div className="">
         <Routes>
 
-        <Route path="/" element={<HomePage/>}></Route>
-        <Route path="/home" element={<HomePage/>}></Route>
+        <Route path="/" element={<Homepage/>}></Route>
+        <Route path="/home" element={<Homepage/>}></Route>
         <Route path="/about" element={<About/>}></Route>
         <Route path="/privaciy-policy" element={<PrivacyPolicy/>}></Route>
         <Route path="/terms-condition" element={<TearmsCondition/>}></Route>

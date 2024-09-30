@@ -12,7 +12,7 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemButton from '@mui/material/ListItemButton';
 import Dashboard from './Admin';
 import { ThemeProvider } from '@emotion/react';
-import { customTheme } from '../them/customeThem';
+import { customeTheme } from '../theme/customeTheme';
 import useMediaQuery from '@mui/material/useMediaQuery';
 import { useTheme } from '@mui/material/styles';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
@@ -73,7 +73,7 @@ export default function DemoAdmin() {
   const drawerVariant = isLargeScreen ? 'permanent' : 'temporary';
 
   return (
-    <ThemeProvider theme={customTheme}> 
+    <ThemeProvider theme={customeTheme}> 
      <Box sx={{ display: `${isLargeScreen?'flex':"block"}` }}>
       <CssBaseline />
       <AdminNavbar handleSideBarViewInMobile={handleSideBarViewInMobile}/>

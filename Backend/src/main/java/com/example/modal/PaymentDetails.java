@@ -8,45 +8,45 @@ public class PaymentDetails {
     private PaymentMethod paymentMethod;
     private PaymentStatus status;
     private String paymentId;
-    private String razorpayPaymentLinkId;
-    private String razorpayPaymentLinkReferenceId;
-    private String razorpayPaymentLinkStatus;
-    private String razorpayPaymentId​;
+    private String paypalPaymentLinkId;
+    private String paypalPaymentLinkReferenceId;
+    private String paypalPaymentLinkStatus;
+    private String paypalPaymentId​;
 
     public PaymentDetails() {
         // TODO Auto-generated constructor stub
     }
 
-    public String getRazorpayPaymentLinkId() {
-        return razorpayPaymentLinkId;
+    public String getpaypalPaymentLinkId() {
+        return paypalPaymentLinkId;
     }
 
-    public void setRazorpayPaymentLinkId(String razorpayPaymentLinkId) {
-        this.razorpayPaymentLinkId = razorpayPaymentLinkId;
+    public void setpaypalPaymentLinkId(String paypalPaymentLinkId) {
+        this.paypalPaymentLinkId = paypalPaymentLinkId;
     }
 
-    public String getRazorpayPaymentLinkReferenceId() {
-        return razorpayPaymentLinkReferenceId;
+    public String getpaypalPaymentLinkReferenceId() {
+        return paypalPaymentLinkReferenceId;
     }
 
-    public void setRazorpayPaymentLinkReferenceId(String razorpayPaymentLinkReferenceId) {
-        this.razorpayPaymentLinkReferenceId = razorpayPaymentLinkReferenceId;
+    public void setpaypalPaymentLinkReferenceId(String paypalPaymentLinkReferenceId) {
+        this.paypalPaymentLinkReferenceId = paypalPaymentLinkReferenceId;
     }
 
-    public String getRazorpayPaymentLinkStatus() {
-        return razorpayPaymentLinkStatus;
+    public String getpaypalPaymentLinkStatus() {
+        return paypalPaymentLinkStatus;
     }
 
-    public void setRazorpayPaymentLinkStatus(String razorpayPaymentLinkStatus) {
-        this.razorpayPaymentLinkStatus = razorpayPaymentLinkStatus;
+    public void setpaypalPaymentLinkStatus(String paypalPaymentLinkStatus) {
+        this.paypalPaymentLinkStatus = paypalPaymentLinkStatus;
     }
 
-    public String getRazorpayPaymentId​() {
-        return razorpayPaymentId​;
+    public String getpaypalPaymentId​() {
+        return paypalPaymentId​;
     }
 
-    public void setRazorpayPaymentId​(String razorpayPaymentId​) {
-        this.razorpayPaymentId​ = razorpayPaymentId​;
+    public void setpaypalPaymentId​(String paypalPaymentId​) {
+        this.paypalPaymentId​ = paypalPaymentId​;
     }
 
     public PaymentMethod getPaymentMethod() {

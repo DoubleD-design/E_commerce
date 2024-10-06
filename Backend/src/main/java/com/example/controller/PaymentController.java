@@ -21,6 +21,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 @RestController
 @RequestMapping("/api")
@@ -55,7 +56,7 @@ public class PaymentController {
         // Tạo các đối tượng Amount, Transaction và Payer để tạo thanh toán
         Amount amount = new Amount();
         amount.setCurrency("USD");
-        amount.setTotal(String.format("%.2f", order.getTotalPrice())); // Tổng số tiền
+        amount.setTotal(String.format(Locale.US, "%.2f", order.getTotalPrice())); // Tổng số tiền
 
         Transaction transaction = new Transaction();
         transaction.setAmount(amount);
